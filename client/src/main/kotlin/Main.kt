@@ -16,6 +16,8 @@ fun main() {
         modules(koinModule)
     }
 
+    //Stas
+
     val listNo = File("listNo.txt")
     val listLong = File("listLong.txt")
     val listObject = File("listObject.txt")
