@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-05-16T20:14:21" hostname="DESKTOP-MV2G25J" time="0.612">
+  <properties/>
+  <testcase name="TestRoute()" classname="Test" time="0.025"/>
+  <testcase name="TestToken()" classname="Test" time="0.586"/>
+  <system-out><![CDATA[коннект настройка
+1
+{}
+cd84-1ffd-3577-764e
+{8eee3514578f2ee82c97f75bcbd1cdc8616800a1=f0a1ce6f80112d72f7276457fd261d671b827567}
+f0a1ce6f80112d72f7276457fd261d671b827567
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

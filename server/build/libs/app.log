@@ -1,0 +1,144 @@
+2023-04-21 18:34:07.038 [main] INFO  ServerModuleGet - Запуск сервера
+2023-04-21 18:34:17.158 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 18:34:17.169 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:35:36.952 [main] INFO  ServerModuleGet - Запуск сервера
+2023-04-21 18:35:59.401 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:35:59.411 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:06.358 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:36:06.359 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:18.561 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:36:18.563 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:22.424 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:36:22.425 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:33.519 [main] INFO  ServerModule - Получена команда: add
+2023-04-21 18:36:33.527 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:37.259 [main] INFO  ServerModule - Получена команда: save
+2023-04-21 18:36:37.518 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:40.625 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:36:40.626 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:52.651 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:36:52.652 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:55.459 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:36:55.460 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:57.378 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:36:57.380 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:36:59.708 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:36:59.715 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:45:23.268 [main] INFO  ServerModuleGet - Запуск сервера
+2023-04-21 18:45:51.076 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:45:51.095 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:14.101 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:46:14.103 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:23.429 [main] INFO  ServerModule - Получена команда: add
+2023-04-21 18:46:23.464 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:28.132 [main] INFO  ServerModule - Получена команда: save
+2023-04-21 18:46:28.203 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:31.179 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:46:31.180 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:41.421 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:46:41.422 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:48.382 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:46:48.382 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:56.051 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:46:56.093 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:46:57.799 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:46:57.800 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:51:44.724 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:51:44.725 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:51:47.950 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:51:47.951 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:51:49.525 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:51:49.527 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:30.104 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:52:30.106 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:36.259 [main] INFO  ServerModule - Получена команда: add
+2023-04-21 18:52:36.261 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:38.959 [main] INFO  ServerModule - Получена команда: save
+2023-04-21 18:52:38.964 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:45.355 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:52:45.357 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:47.195 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:52:47.203 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:49.140 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:52:49.142 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:52:59.498 [main] INFO  ServerModule - Получена команда: save
+2023-04-21 18:52:59.503 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:53:05.256 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:53:05.262 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:53:06.603 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:53:06.605 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:53:18.407 [main] INFO  ServerModule - Получена команда: history
+2023-04-21 18:53:18.409 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:53:47.748 [main] INFO  ServerModule - Получена команда: average_of_distance
+2023-04-21 18:53:47.848 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:53:51.679 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:53:51.682 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:56:03.403 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 18:56:03.405 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:56:05.452 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 18:56:05.453 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:56:14.203 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:56:14.205 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:56:46.472 [main] INFO  ServerModule - Получена команда: 
+2023-04-21 18:57:13.739 [main] INFO  ServerModule - Получена команда: 
+2023-04-21 18:57:19.484 [main] INFO  ServerModule - Получена команда: 
+2023-04-21 18:57:22.520 [main] INFO  ServerModule - Получена команда: 
+2023-04-21 18:57:25.549 [main] INFO  ServerModule - Получена команда: 
+2023-04-21 18:57:47.380 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:57:47.381 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:58:25.632 [main] INFO  ServerModule - Получена команда: update_command
+2023-04-21 18:58:25.633 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:58:31.764 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:58:31.765 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:58:40.495 [main] INFO  ServerModule - Получена команда: add
+2023-04-21 18:58:40.497 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:58:42.474 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:58:42.475 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:58:47.003 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:58:47.005 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:06.664 [main] INFO  ServerModule - Получена команда: save
+2023-04-21 18:59:06.667 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:09.546 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:59:09.547 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:11.949 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 18:59:11.950 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:15.496 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:59:15.497 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:17.398 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 18:59:17.405 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:18.765 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 18:59:18.767 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 18:59:20.550 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 18:59:20.551 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:01:06.429 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 19:01:06.430 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:01:10.943 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 19:01:10.944 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:01:12.176 [main] INFO  ServerModule - Получена команда: load
+2023-04-21 19:01:12.276 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:01:14.116 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 19:01:14.119 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:01:17.366 [main] INFO  ServerModule - Получена команда: clear
+2023-04-21 19:01:17.369 [main] INFO  ServerModule - Отправлен результат
+2023-04-21 19:04:53.492 [main] INFO  ServerModule - Получена команда: show
+2023-04-21 19:04:53.493 [main] INFO  ServerModule - Отправлен результат
+2023-05-16 19:17:34.494 [main] INFO  ServerModuleGet - Запуск сервера
+2023-05-16 19:18:20.453 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 19:18:42.521 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 19:19:06.385 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 19:19:32.620 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:15:41.866 [main] INFO  ServerModuleGet - Запуск сервера
+2023-05-16 23:16:21.971 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:16:42.451 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:17:13.198 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:17:42.127 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:18:00.544 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:18:14.958 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:18:23.675 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:18:34.901 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:19:34.797 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:19:40.866 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:19:55.049 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:20:32.323 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:20:36.373 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
+2023-05-16 23:21:22.122 [ForkJoinPool.commonPool-worker-1] INFO  ServerModule - Отправлен результат
