@@ -229,7 +229,7 @@ class DataBaseManager(): KoinComponent{
 
     fun scanLogNPass(whatToGet: String): String {
         val properties = Properties()
-        val fileInputStream: FileInputStream = FileInputStream("D:\\ConfirmedLab7\\server\\src\\main\\resources\\dbconfig.cfg")
+        val fileInputStream: FileInputStream = FileInputStream("D:\\ConfirmedLab8\\server\\src\\main\\resources\\dbconfig.cfg")
         properties.load(fileInputStream)
         val user = properties.getProperty("user")
         val pas = properties.getProperty("password")

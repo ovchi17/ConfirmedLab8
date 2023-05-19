@@ -1,3 +1,3 @@
-rootProject.name = "ConfirmedLab7"
+rootProject.name = "ConfirmedLab8"
 include("client", "commonFiles", "server")
 
