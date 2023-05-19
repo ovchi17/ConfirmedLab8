@@ -15,7 +15,6 @@ fun main() {
     startKoin {
         modules(koinModule)
     }
-    //Ilya
 
     val listNo = File("listNo.txt")
     val listLong = File("listLong.txt")
