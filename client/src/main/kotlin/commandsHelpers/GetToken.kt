@@ -10,6 +10,7 @@ class GetToken: KoinComponent {
 
     val clientModule: ClientModule by inject()
     val answerToUser: AnswerToUser = AnswerToUser()
+    var token = ""
 
     fun loginAndGetToken(login: String, pass: String): Boolean{
         val logPass = "$login:$pass"
@@ -19,6 +20,7 @@ class GetToken: KoinComponent {
         val resultAnswer = clientModule.receiver(0)
         if (resultAnswer.status == Status.TOKEN){
             answerToUser.writeToConsoleLn("Успешно! Ваш токен: ${resultAnswer.token}")
+            token = resultAnswer.token
             return true
         }else{
             answerToUser.writeToConsoleLn("Данный логин уже зарегестирован!")

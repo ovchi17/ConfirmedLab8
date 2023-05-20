@@ -35,12 +35,13 @@ fun main() {
     val logger: Logger = LogManager.getLogger(KoinStarter::class.java)
     var authorizationFlag = false
     val sendList = mutableListOf<Any>()
-    launch<MyApp>("no")
 
-    writeToConsole.writeToConsoleLn("Для получения списка команд введите: help")
+    //writeToConsole.writeToConsoleLn("Для получения списка команд введите: help")
     clientModule.start()
     logger.info("Начало программы")
     tokenizator.downloadLists()
+
+    launch<MyApp>("no")
 
     while (true){
         if (authorizationFlag){
