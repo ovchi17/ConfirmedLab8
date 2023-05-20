@@ -1,4 +1,7 @@
 
+
+
+import app.MyApp
 import commandsHelpers.GetToken
 import di.koinModule
 import org.koin.core.component.KoinComponent
@@ -7,8 +10,12 @@ import org.koin.core.context.startKoin
 import usersView.AnswerToUser
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import tornadofx.App
+import tornadofx.launch
 import java.io.File
 import kotlin.system.exitProcess
+import tornadofx.*
+
 
 fun main() {
 
@@ -28,6 +35,7 @@ fun main() {
     val logger: Logger = LogManager.getLogger(KoinStarter::class.java)
     var authorizationFlag = false
     val sendList = mutableListOf<Any>()
+    launch<MyApp>("no")
 
     writeToConsole.writeToConsoleLn("Для получения списка команд введите: help")
     clientModule.start()
