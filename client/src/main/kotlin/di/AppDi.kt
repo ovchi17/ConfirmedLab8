@@ -6,6 +6,7 @@ import commandsHelpers.AddSet
 import commandsHelpers.ExecuteScript
 import org.koin.dsl.module
 import usersView.ConsoleWriter
+import view.BasicInfo
 
 
 val koinModule = module {

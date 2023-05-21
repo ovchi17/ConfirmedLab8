@@ -1,14 +1,13 @@
 package app
 
 import javafx.scene.text.FontWeight
-import tornadofx.Stylesheet
-import tornadofx.box
-import tornadofx.cssclass
-import tornadofx.px
+import tornadofx.*
 
 class Styles : Stylesheet() {
     companion object {
         val heading by cssclass()
+        val blackBackground by cssclass()
+        val whiteText by cssclass()
     }
 
     init {
@@ -16,6 +15,13 @@ class Styles : Stylesheet() {
             padding = box(10.px)
             fontSize = 20.px
             fontWeight = FontWeight.BOLD
+        }
+        blackBackground {
+            backgroundColor += c("#000000")
+        }
+
+        whiteText {
+            textFill = c("#FFFFFF")
         }
     }
 }
