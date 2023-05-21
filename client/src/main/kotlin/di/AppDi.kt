@@ -1,6 +1,7 @@
 package di
 
 import ClientModule
+import LoginsUpdate
 import Tokenizator
 import commandsHelpers.AddSet
 import commandsHelpers.ExecuteScript
@@ -29,6 +30,10 @@ val koinModule = module {
 
     single {
         ClientModule()
+    }
+
+    single {
+        LoginsUpdate()
     }
 
 }

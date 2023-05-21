@@ -1,8 +1,12 @@
 package view
 
+import ClientModule
+import LoginsUpdate
 import app.Styles
 import commandsHelpers.GetToken
+import javafx.application.Platform
 import javafx.beans.property.SimpleStringProperty
+import javafx.collections.ObservableList
 import javafx.geometry.Pos
 import javafx.scene.Parent
 import javafx.scene.control.Tooltip
@@ -12,12 +16,18 @@ import javafx.scene.layout.RowConstraints
 import javafx.scene.paint.Color
 import javafx.scene.text.Font.font
 import javafx.scene.text.FontWeight
+import moduleWithResults.Status
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tornadofx.*
+import usersView.LogSingle
 import java.util.*
+import kotlin.concurrent.thread
 
-class BasicInfo{
+class BasicInfo: KoinComponent {
+
+    val loginsUpdate: LoginsUpdate by inject()
+    val clientModule: ClientModule by inject()
     companion object {
         var logName = ""
         var token = ""
@@ -124,6 +134,33 @@ class WorkingPage : View("BebraView"), KoinComponent{
 
     val login = Login()
     val textPropertyName = SimpleStringProperty(BasicInfo.logName)
+    val basicInfo = BasicInfo()
+    //val turnOn = basicInfo.loginsUpdate.receiver()
+    var logs: ObservableList<LogSingle> = mutableListOf<LogSingle>().observable()
+
+    init {
+        val thread = thread {
+            while (!Thread.currentThread().isInterrupted) {
+                val argument = mutableListOf<String>()
+                basicInfo.clientModule.sender("get_valid_logins", argument, BasicInfo.token)
+                val resultAnswer = basicInfo.clientModule.receiver(0)
+                val getResultModule = resultAnswer
+                val rnResult = mutableListOf<LogSingle>()
+                if (getResultModule.status == Status.SUCCESS) {
+                    for (msg in getResultModule.args) {
+                        rnResult.add(LogSingle(msg as String))
+                    }
+                }
+                Platform.runLater {
+                    logs.setAll(rnResult)
+                }
+                Thread.sleep(7000)
+            }
+        }
+        primaryStage.setOnCloseRequest {
+            thread.interrupt()
+        }
+    }
 
     override val root = stackpane {
         hbox {
@@ -139,6 +176,11 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     }
                     label(textPropertyName){
                         font = font("Segoe UI", FontWeight.BOLD, 20.0)
+                    }
+                }
+                vbox {
+                    tableview(logs) {
+                        readonlyColumn("Login", LogSingle::loginH)
                     }
                 }
             }
@@ -328,4 +370,5 @@ class WorkingPage : View("BebraView"), KoinComponent{
             }
         }
     }
+
 }

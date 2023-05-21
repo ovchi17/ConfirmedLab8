@@ -15,6 +15,7 @@ import tornadofx.launch
 import java.io.File
 import kotlin.system.exitProcess
 import tornadofx.*
+import kotlin.concurrent.thread
 
 
 fun main() {
@@ -30,11 +31,13 @@ fun main() {
     val writeToConsole: AnswerToUser = AnswerToUser()
     val tokenizator = KoinStarter().returnTokenizator()
     val clientModule = KoinStarter().returnClientModule()
+    val loginsUpdate = KoinStarter().returnLoginsUpdate()
     val getToken = GetToken()
     System.setProperty("log4j.configurationFile", "classpath:log4j2.xml")
     val logger: Logger = LogManager.getLogger(KoinStarter::class.java)
     var authorizationFlag = false
     val sendList = mutableListOf<Any>()
+    //thread { loginsUpdate.receiver() }
 
     //writeToConsole.writeToConsoleLn("Для получения списка команд введите: help")
     clientModule.start()
@@ -88,11 +91,16 @@ fun main() {
 class KoinStarter: KoinComponent{
     val tokenizator: Tokenizator by inject()
     val clientModule: ClientModule by inject()
+    val loginsUpdate: LoginsUpdate by inject()
     fun returnTokenizator(): Tokenizator{
         return tokenizator
     }
 
     fun returnClientModule(): ClientModule{
         return clientModule
+    }
+
+    fun returnLoginsUpdate(): LoginsUpdate{
+        return loginsUpdate
     }
 }

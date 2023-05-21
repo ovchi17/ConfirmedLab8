@@ -9,10 +9,10 @@ import org.koin.core.component.inject
 import workCommandsList.*
 import java.net.DatagramPacket
 import java.net.DatagramSocket
+import java.net.InetAddress
 import java.util.concurrent.Executors
 import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.LinkedBlockingQueue
-
 /**
  * Class ServerModule.
  *
@@ -20,11 +20,11 @@ import java.util.concurrent.LinkedBlockingQueue
  * @since 1.0.0
  */
 class ServerModule {
-    var socket = DatagramSocket(2022)
-    val commandStarter = CommandStarter()
-    val gson = Gson()
+    var socket = DatagramSocket(2055)
     val buffer = ByteArray(65535)
     val packet = DatagramPacket(buffer, buffer.size)
+    val commandStarter = CommandStarter()
+    val gson = Gson()
     val logger: Logger = LogManager.getLogger(ServerModule::class.java)
     val availableTokens = mutableMapOf<String, String>() // hash-token -> hashLogin
     val tokenToValid = mutableMapOf<String, Boolean>() // hash-token -> valid (t/f)
@@ -87,6 +87,20 @@ class ServerModule {
         }
     }
 
+    fun usersSender() {
+        while (true) {
+            val listValidLogin = mutableListOf<String>()
+            val keysList = availableTokens.keys.toList()
+            for (k in keysList){
+                if (tokenToValid[k] == true){
+                    availableTokens[k]?.let { listValidLogin.add(it) }
+                }
+            }
+            val json = gson.toJson(listValidLogin)
+            val changedToBytes = json.toByteArray()
+        }
+    }
+
 }
 
 class CommandStarter(): KoinComponent{
@@ -112,6 +126,7 @@ class CommandStarter(): KoinComponent{
     val switch: Switch = Switch()
     val token: Token = Token()
     val logOut: LogOut = LogOut()
+    val validLogins: ValidLogins = ValidLogins()
 
     fun mp(command: String): Command? {
 
@@ -134,7 +149,8 @@ class CommandStarter(): KoinComponent{
             "filter_less_than_distance" to filterLessThanDistance,
             "switch" to switch,
             "token" to token,
-            "log_out" to logOut)
+            "log_out" to logOut,
+            "get_valid_logins" to validLogins)
 
         if (command in COMMANDS) {
             workWithCollection.historyUpdate(command)

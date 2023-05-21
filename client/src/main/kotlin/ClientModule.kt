@@ -8,6 +8,7 @@ import moduleWithResults.WorkWithResultModule
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import usersView.AnswerToUser
+import java.net.DatagramPacket
 import java.nio.ByteBuffer
 import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
@@ -23,11 +24,11 @@ class ClientModule() {
     private lateinit var channel: DatagramChannel
     val answerToUser = AnswerToUser()
     private val nameHost: String = "localhost"
-    private val namePort: Int = 2022
+    private val namePort: Int = 2055
     val gson = Gson()
     val logger: Logger = LogManager.getLogger(ClientModule::class.java)
     val keyGenerator: KeyGenerator = KeyGenerator()
-    var key = "nothing"
+    var keyG = "nothing"
     
     /**
      * start method. Starts client module
@@ -59,11 +60,11 @@ class ClientModule() {
      */
     fun sender(command: String, args: List<Any>, token: String){
         val data = WorkWithResultModule()
-        key = keyGenerator.generateRandomKey()
+        keyG = keyGenerator.generateRandomKey()
         data.setCommand(command)
         data.setArgs(args)
         data.setToken(token)
-        data.setUniqueKey(key)
+        data.setUniqueKey(keyG)
         val json = gson.toJson(data.getResultModule())
         data.clear()
         val buffer = ByteBuffer.wrap(json.toByteArray())
@@ -82,7 +83,7 @@ class ClientModule() {
         var result: ResultModule = ResultModule(mutableListOf(), Status.ERROR, "noAnswer", "noCommand", mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), "noToken", "noKey")
         while (ct < 3){
             val trashForOneTime = receiverHelper()
-            if (trashForOneTime.uniqueKey == key){
+            if (trashForOneTime.uniqueKey == keyG){
                 result = trashForOneTime
                 break
             }
@@ -107,12 +108,11 @@ class ClientModule() {
             val bytesReceiver = bufferReceive.array()
             val resultStr = String(bytesReceiver, 0, bufferReceive.position())
             val getInfo = gson.fromJson(resultStr, ResultModule::class.java)
-            if (getInfo.uniqueKey != key){
+            if (getInfo.uniqueKey != keyG){
                 return ResultModule(mutableListOf(), Status.ERROR, "noAnswer", "noCommand", mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), "noToken", "noKey")
             }
             return getInfo
         }
     }
-
 
 }
