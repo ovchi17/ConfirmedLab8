@@ -54,7 +54,7 @@ class MyView: View("BebraView"), KoinComponent {
         alignment = javafx.geometry.Pos.CENTER
         addClass(Styles.blackBackground)
 
-        label("Здравствуйте!"){
+        label("Здравствуйте! | Hello!"){
             textFill = Color.WHITE
             style {
                 fontSize = 40.px
@@ -67,6 +67,8 @@ class MyView: View("BebraView"), KoinComponent {
             prefHeight = 60.0
             style {
                 fontSize = 20.px
+                backgroundColor += Color.web("#852178")
+                backgroundRadius += box(70.px)
             }
             action {
                 replaceWith<Login>()
@@ -77,7 +79,13 @@ class MyView: View("BebraView"), KoinComponent {
 
 class Login : View("BebraView"), KoinComponent {
 
-    override val root = Form()
+    //override val root = Form()
+    override val root = Form().apply {
+        style {
+            border = null
+            backgroundColor += Color.DARKGRAY
+        }
+    }
 
     private val usernameField = textfield()
     private val passwordField = passwordfield()
@@ -87,30 +95,52 @@ class Login : View("BebraView"), KoinComponent {
 
     init {
         with(root) {
-            fieldset("Registration") {
-                field("Login") {
-                    add(usernameField)
+            hbox{
+                prefWidth = 1000.0
+                prefHeight = 1000.0
+                style {
+                    backgroundColor += Color.DARKGRAY
                 }
-                field("Password") {
-                    add(passwordField)
-                }
-                button("Register").action {
-                    val token = registerUser()
-                    if (token.length == 19 || token.length == 24){
-                        textPropertyRes.set(token)
-                        val timer = Timer()
-                        timer.schedule(object : TimerTask() {
-                            override fun run() {
-                                runLater {
-                                    replaceWith<WorkingPage>()
-                                }
-                            }
-                        }, 5000)
-                    }else{
-                        textPropertyRes.set(token)
+                fieldset("Регистрация") {
+                    prefHeight = 600.0
+                    style {
+                        border = null
+                        backgroundColor += Color.DARKGRAY
                     }
+                    field("Ваш логин:") {
+                        add(usernameField)
+                    }
+                    field("Ваш пароль:") {
+                        add(passwordField)
+                    }
+                    button("Войти/Зарегестрироваться"){
+                        prefWidth = 200.0
+                        prefHeight = 35.0
+
+                        style{
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+
+                        action {
+                            val token = registerUser()
+                            if (token.length == 19 || token.length == 24){
+                                textPropertyRes.set(token)
+                                val timer = Timer()
+                                timer.schedule(object : TimerTask() {
+                                    override fun run() {
+                                        runLater {
+                                            replaceWith<WorkingPage>()
+                                        }
+                                    }
+                                }, 5000)
+                            }else{
+                                textPropertyRes.set(token)
+                            }
+                        }
+                    }
+                    label(textPropertyRes)
                 }
-                label(textPropertyRes)
             }
         }
     }
@@ -185,14 +215,14 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         readonlyColumn("Login", LogSingle::loginH)
                     }
                 }
-                hbox(4, Pos.BOTTOM_LEFT){
+                hbox(5, Pos.BOTTOM_LEFT){
 
                     prefHeight = 135.0
 
                     label("")
 
                     button("LogOut"){
-                        prefWidth = 160.0
+                        prefWidth = 122.0
                         prefHeight = 35.0
 
                         style{
@@ -207,7 +237,20 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         }
                     }
                     button("TurnOff"){
-                        prefWidth = 160.0
+                        prefWidth = 122.0
+                        prefHeight = 35.0
+
+                        style{
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+                        action {
+                            val sendList = mutableListOf<String>()
+                            basicInfo.tokenizator.tokenizator("exit", sendList, BasicInfo.token)
+                        }
+                    }
+                    button("ShowTable"){
+                        prefWidth = 122.0
                         prefHeight = 35.0
 
                         style{
