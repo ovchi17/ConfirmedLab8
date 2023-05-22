@@ -2,6 +2,7 @@ package view
 
 import ClientModule
 import LoginsUpdate
+import Tokenizator
 import app.Styles
 import commandsHelpers.GetToken
 import javafx.application.Platform
@@ -28,6 +29,7 @@ class BasicInfo: KoinComponent {
 
     val loginsUpdate: LoginsUpdate by inject()
     val clientModule: ClientModule by inject()
+    val tokenizator: Tokenizator by inject()
     companion object {
         var logName = ""
         var token = ""
@@ -181,6 +183,41 @@ class WorkingPage : View("BebraView"), KoinComponent{
                 vbox {
                     tableview(logs) {
                         readonlyColumn("Login", LogSingle::loginH)
+                    }
+                }
+                hbox(4, Pos.BOTTOM_LEFT){
+
+                    prefHeight = 135.0
+
+                    label("")
+
+                    button("LogOut"){
+                        prefWidth = 160.0
+                        prefHeight = 35.0
+
+                        style{
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+                        action {
+                            val sendList = mutableListOf<Any>()
+                            basicInfo.clientModule.sender("log_out", sendList, BasicInfo.token)
+                            basicInfo.clientModule.receiver(0)
+                            replaceWith<Login>()
+                        }
+                    }
+                    button("TurnOff"){
+                        prefWidth = 160.0
+                        prefHeight = 35.0
+
+                        style{
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+                        action {
+                            val sendList = mutableListOf<String>()
+                            basicInfo.tokenizator.tokenizator("exit", sendList, BasicInfo.token)
+                        }
                     }
                 }
             }
