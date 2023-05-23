@@ -1,4 +1,7 @@
 package moduleWithResults
+
+import dataSet.Route
+
 /**
  * Data Class ResultModule. Contains results messages
  *

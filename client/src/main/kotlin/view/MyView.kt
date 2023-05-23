@@ -5,6 +5,7 @@ import LoginsUpdate
 import Tokenizator
 import app.Styles
 import commandsHelpers.GetToken
+import dataSet.FakeRoute
 import javafx.application.Platform
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
@@ -258,8 +259,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                             backgroundRadius += box(70.px)
                         }
                         action {
-                            val sendList = mutableListOf<String>()
-                            basicInfo.tokenizator.tokenizator("exit", sendList, BasicInfo.token)
+                            replaceWith<TableShow>()
                         }
                     }
                 }
@@ -450,5 +450,141 @@ class WorkingPage : View("BebraView"), KoinComponent{
             }
         }
     }
-
 }
+
+class TableShow: View("BebraView"), KoinComponent {
+
+    val basicInfo = BasicInfo()
+    var objStrings: ObservableList<FakeRoute> = mutableListOf<FakeRoute>().observable()
+
+    init {
+        val thread = thread {
+            while (!Thread.currentThread().isInterrupted) {
+                val argument = mutableListOf<String>()
+                basicInfo.clientModule.sender("show", argument, BasicInfo.token)
+                val resultAnswer = basicInfo.clientModule.receiver(0)
+                val getResultModule = resultAnswer
+                val rnResult = mutableListOf<FakeRoute>()
+                if (getResultModule.status == Status.SUCCESS) {
+                    for (msg in getResultModule.args) {
+                        val rn = msg.toString().split(" ")
+                        rnResult.add(FakeRoute(rn[0], rn[1], rn[2], rn[3], rn[4], rn[5], rn[6], rn[7], rn[8], rn[9], rn[10], rn[11], rn[12]))
+                    }
+                }
+                Platform.runLater {
+                    objStrings.setAll(rnResult)
+                }
+                Thread.sleep(7000)
+            }
+        }
+        primaryStage.setOnCloseRequest {
+            thread.interrupt()
+        }
+    }
+
+    override val root = vbox {
+        prefWidth = 800.0
+        prefHeight = 600.0
+        style {
+            backgroundColor += Color.DARKGRAY
+        }
+            vbox {
+                tableview(objStrings) {
+                    column("ID", FakeRoute::id){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("NAME", FakeRoute::name){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("CreationDate", FakeRoute::creationDate){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l11", FakeRoute::location11){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l12", FakeRoute::location12){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l13", FakeRoute::location13){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l21", FakeRoute::location21){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l22", FakeRoute::location22){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("l23", FakeRoute::location23){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("distance", FakeRoute::distance){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("c1", FakeRoute::coordinate1){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("c2", FakeRoute::coordinate2){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                    column("OWNER", FakeRoute::owner){
+                        cellFormat {
+                            alignment = Pos.CENTER
+                            text = it
+                        }
+                    }
+                }
+            }
+        vbox(3,  Pos.BOTTOM_LEFT) {
+            prefHeight = 160.0
+            button("Назад"){
+                prefWidth = 122.0
+                prefHeight = 35.0
+
+                style{
+                    backgroundColor += Color.web("#852178")
+                    backgroundRadius += box(70.px)
+                }
+                action {
+                    replaceWith<WorkingPage>()
+                }
+            }
+        }
+    }
+}
+
