@@ -288,7 +288,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<AddView>()
                     }
 
                     setTooltip(Tooltip("** add {element} : добавить новый элемент в коллекцию"))
@@ -302,7 +302,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<AddIfMaxView>()
                     }
 
                     setTooltip(Tooltip("** add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции"))
@@ -316,7 +316,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<AverageOfDistanceView>()
                     }
 
                     setTooltip(Tooltip("** average_of_distance : вывести среднее значение поля distance для всех элементов коллекции"))
@@ -330,7 +330,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<ClearView>()
                     }
 
                     setTooltip(Tooltip("** clear : очистить коллекцию"))
@@ -344,7 +344,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<ExitServerView>()
                     }
 
                     setTooltip(Tooltip("** exitServer : Выключения сервера"))
@@ -358,7 +358,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<FilterLessThanDistanceView>()
                     }
 
                     setTooltip(Tooltip("** filter_less_than_distance distance : вывести элементы, значение поля distance которых меньше заданного"))
@@ -372,7 +372,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<HistoryView>()
                     }
 
                     setTooltip(Tooltip("** history : вывести последние 14 команд (без их аргументов)"))
@@ -386,7 +386,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<InfoView>()
                     }
 
                     setTooltip(Tooltip("** info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)"))
@@ -400,7 +400,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<RemoveAllByDistanceView>()
                     }
 
                     setTooltip(Tooltip("** remove_all_by_distance distance : удалить из коллекции все элементы, значение поля distance которого эквивалентно заданному"))
@@ -414,7 +414,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<RemoveByIdView>()
                     }
 
                     setTooltip(Tooltip("** remove_by_id id : удалить элемент из коллекции по его id"))
@@ -428,7 +428,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<SaveView>()
                     }
 
                     setTooltip(Tooltip("** save : сохранить коллекцию в файл"))
@@ -442,7 +442,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        //TODO: add
+                        replaceWith<UpdateIdView>()
                     }
 
                     setTooltip(Tooltip("** update id {element} : обновить значение элемента коллекции, id которого равен заданному"))

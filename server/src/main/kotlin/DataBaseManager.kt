@@ -17,7 +17,7 @@ class DataBaseManager(): KoinComponent{
 
     val user = scanLogNPass("user")
     val pas = scanLogNPass("pas")
-    val url = "jdbc:postgresql://localhost:5433/studs"
+    val url = "jdbc:postgresql://localhost:5433/postgres"
     val workWithCollection: CollectionMainCommands by inject()
     val serverModule: ServerModule by inject()
     val connectionDB = connect()
@@ -229,7 +229,7 @@ class DataBaseManager(): KoinComponent{
 
     fun scanLogNPass(whatToGet: String): String {
         val properties = Properties()
-        val fileInputStream: FileInputStream = FileInputStream("D:\\ConfirmedLab8\\server\\src\\main\\resources\\dbconfig.cfg")
+        val fileInputStream: FileInputStream = FileInputStream("C:\\Users\\Akina\\IdeaProjects\\ConfirmedLab8\\server\\src\\main\\resources\\dbconfig.cfg")
         properties.load(fileInputStream)
         val user = properties.getProperty("user")
         val pas = properties.getProperty("password")
