@@ -8,6 +8,7 @@ plugins {
     application
     id("org.jetbrains.dokka") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("org.openjfx.javafxplugin") version "0.0.10"
 
 }
 
@@ -17,6 +18,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     val kotlinVersion = "1.8.0"
@@ -31,9 +33,12 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("org.apache.logging.log4j:log4j-core:2.17.0")
+    implementation("no.tornado:tornadofx:1.7.20")
+    implementation("org.openjfx:javafx-controls:16")
 
     implementation(project(":commonFiles"))
 }
+
 
 tasks.test {
     useJUnitPlatform()
@@ -60,4 +65,9 @@ application {
 
 subprojects {
     apply(plugin = "org.jetbrains.dokka")
+}
+
+javafx {
+    version = "16"
+    modules = listOf("javafx.controls", "javafx.fxml")
 }

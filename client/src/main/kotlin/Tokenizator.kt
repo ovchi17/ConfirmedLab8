@@ -131,9 +131,10 @@ class Tokenizator: KoinComponent {
      * @param command: Command. Contains the command to be executed.
      * @param mass: Array of String arguments.
      */
-    fun tokenizator(command: String, mass: List<String>, tkn: String){
+    fun tokenizator(command: String, mass: List<String>, tkn: String): ResultModule{
         val sendList = mutableListOf<Any>()
         val clientModule: ClientModule by inject()
+        val rm: ResultModule = ResultModule(mutableListOf(), Status.SUCCESS, null, "noCommand", mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), "noToken", "noKey")
         if (commandsList(command) == "listOfLong"){
             logger.info("Начала запуска команды по шаблону listOfLong")
             var newToken:Long = 1
@@ -145,7 +146,8 @@ class Tokenizator: KoinComponent {
             sendList.add(newToken)
             clientModule.sender(command, sendList, tkn) // Следить
             val resultAnswer = clientModule.receiver(0)
-            displayModule.displayModule(resultAnswer)
+            //displayModule.displayModule(resultAnswer)
+            return resultAnswer
         }else if(commandsList(command) == "listOfString"){
             logger.info("Начала запуска команды по шаблону listOfString")
             sendList.add(mass[0])
@@ -162,59 +164,82 @@ class Tokenizator: KoinComponent {
             }else{
                 getResultModule.errorDescription?.let { writeToConsole.printToConsoleLn(it) }
             }
+            return getResultModule
         }else if(commandsList(command) == "listOfObject"){
             logger.info("Начала запуска команды по шаблону listOfObject")
-            val name = addSet.name("noInfo")
-            val coord1: Long = addSet.coord1("noInfo")
-            val coord2: Long = addSet.coord2("noInfo")
-            val location1: Long = addSet.location1("noInfo")
-            val location2: Long = addSet.location2("noInfo")
-            val location3: Int = addSet.location3("noInfo")
-            val location1_2: Long = addSet.location12("noInfo")
-            val location2_2: Long = addSet.location22("noInfo")
-            val location3_2: Int = addSet.location32("noInfo")
-            val distance = addSet.distance("noInfo")
+            //val name = addSet.name("noInfo")
+            //val coord1: Long = addSet.coord1("noInfo")
+            //val coord2: Long = addSet.coord2("noInfo")
+            //val location1: Long = addSet.location1("noInfo")
+            //val location2: Long = addSet.location2("noInfo")
+            //val location3: Int = addSet.location3("noInfo")
+            //val location1_2: Long = addSet.location12("noInfo")
+            //val location2_2: Long = addSet.location22("noInfo")
+            //val location3_2: Int = addSet.location32("noInfo")
+            //val distance = addSet.distance("noInfo")
+            val name = mass[0].toString()
+            val coord1: Long = mass[1].toLong()
+            val coord2: Long = mass[2].toLong()
+            val location1: Long = mass[3].toLong()
+            val location2: Long = mass[4].toLong()
+            val location3: Int = mass[5].toInt()
+            val location1_2: Long = mass[6].toLong()
+            val location2_2: Long = mass[7].toLong()
+            val location3_2: Int = mass[8].toInt()
+            val distance = mass[9].toLong()
+            //обезопасить через try/catch
             val list = mutableListOf<Any>(name, coord1, coord2, location1, location2, location3, location1_2, location2_2, location3_2, distance)
             sendList.addAll(list)
             clientModule.sender(command, sendList, tkn) // Следить
             val resultAnswer = clientModule.receiver(0)
-            displayModule.displayModule(resultAnswer)
+            //displayModule.displayModule(resultAnswer)
+            return resultAnswer
         }else if(commandsList(command) == "listOfObjectPlus"){
             logger.info("Начала запуска команды по шаблону listOfObjectPlus")
-            val name = addSet.name("noInfo")
-            val coord1: Long = addSet.coord1("noInfo")
-            val coord2: Long = addSet.coord2("noInfo")
-            val location1: Long = addSet.location1("noInfo")
-            val location2: Long = addSet.location2("noInfo")
-            val location3: Int = addSet.location3("noInfo")
-            val location1_2: Long = addSet.location12("noInfo")
-            val location2_2: Long = addSet.location22("noInfo")
-            val location3_2: Int = addSet.location32("noInfo")
-            val distance = addSet.distance("noInfo")
-            val id: Long = addSet.id("noInfo")
+            //val name = addSet.name("noInfo")
+            //val coord1: Long = addSet.coord1("noInfo")
+            //val coord2: Long = addSet.coord2("noInfo")
+            //val location1: Long = addSet.location1("noInfo")
+            //val location2: Long = addSet.location2("noInfo")
+            //val location3: Int = addSet.location3("noInfo")
+            //val location1_2: Long = addSet.location12("noInfo")
+            //val location2_2: Long = addSet.location22("noInfo")
+            //val location3_2: Int = addSet.location32("noInfo")
+            //val distance = addSet.distance("noInfo")
+            //val id: Long = addSet.id("noInfo")
+            val name = mass[0].toString()
+            val coord1: Long = mass[1].toLong()
+            val coord2: Long = mass[2].toLong()
+            val location1: Long = mass[3].toLong()
+            val location2: Long = mass[4].toLong()
+            val location3: Int = mass[5].toInt()
+            val location1_2: Long = mass[6].toLong()
+            val location2_2: Long = mass[7].toLong()
+            val location3_2: Int = mass[8].toInt()
+            val distance = mass[9].toLong()
+            val id: Long = mass[10].toLong()
+            //обезопасить через try/catch
             val list = mutableListOf<Any>(name, coord1, coord2, location1, location2, location3, location1_2, location2_2, location3_2, distance, id)
             sendList.addAll(list)
             clientModule.sender(command, sendList, tkn) // Следить
             val resultAnswer = clientModule.receiver(0)
-            displayModule.displayModule(resultAnswer)
+            //displayModule.displayModule(resultAnswer)
+            return resultAnswer
         }else if(commandsList(command) == "listOfNo"){
             logger.info("Начала запуска команды по шаблону listOfNo")
-            if (command == "help"){
-                help.execute()
-            }else if(command == "exit"){
+            if(command == "exit"){
                 exit.execute(tkn)
-            }else{
-                clientModule.sender(command, sendList, tkn) //Следить
-                val resultAnswer = clientModule.receiver(0)
-                if (command == "update_command"){
-                    update.execute(resultAnswer)
-                }else{
-                    displayModule.displayModule(resultAnswer)
-                }
             }
-        }else if(commandsList(command) == "noCommand"){
-            logger.info("Неверная команда")
-            writeToConsole.printToConsoleLn("infoAbout")
+            clientModule.sender(command, sendList, tkn) //Следить
+            val resultAnswer = clientModule.receiver(0)
+            if (command == "update_command"){
+                update.execute(resultAnswer)
+            }else{
+                displayModule.displayModule(resultAnswer)
+            }
+            return resultAnswer
+        }else{
+            return rm
         }
     }
 

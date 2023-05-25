@@ -1,11 +1,13 @@
 package di
 
 import ClientModule
+import LoginsUpdate
 import Tokenizator
 import commandsHelpers.AddSet
 import commandsHelpers.ExecuteScript
 import org.koin.dsl.module
 import usersView.ConsoleWriter
+import view.BasicInfo
 
 
 val koinModule = module {
@@ -28,6 +30,10 @@ val koinModule = module {
 
     single {
         ClientModule()
+    }
+
+    single {
+        LoginsUpdate()
     }
 
 }

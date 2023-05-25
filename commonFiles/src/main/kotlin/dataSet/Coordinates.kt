@@ -16,12 +16,12 @@ class Coordinates {
         y = checkY
     }
 
-    private var x: Long?
+    var x: Long?
         set(value){
             field = value
         }
 
-    private var y: Long?
+    var y: Long?
         set(value){
             field = value
         }

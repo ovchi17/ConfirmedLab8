@@ -20,20 +20,14 @@ class Show: Command() {
 
         val collection = PriorityQueue<Route>(RouteComporator())
         collection.addAll(workWithCollection.getCollection())
+        val listOfRoutes = mutableListOf<String>()
 
-        if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
-        }else if(collection.size == 1){
-            workWithResultModule.setMessages("Name: " + collection.peek().name.toString())
-            workWithResultModule.setMessages(" Id: " + collection.peek().id.toString())
-        }else{
-            for (i in 0..collection.size - 1){
-                workWithResultModule.setMessages("Name: " + collection.peek().name.toString())
-                workWithResultModule.setMessages(" Id: " + collection.peek().id.toString())
-                collection.poll()
-            }
+        for (obj in collection){
+            val objRes = obj.id.toString() + " " + obj.name + " " + obj.creationDate.toString() + " " + obj.from.x.toString() + " " + obj.from.y.toString() + " " + obj.from.z.toString() + " " + obj.to.x.toString() + " " + obj.to.y.toString() + " " + obj.to.z.toString() + " " + obj.distance.toString() + " " + obj.coordinates.x.toString() + " " + obj.coordinates.y.toString() + " " + obj.owner
+            listOfRoutes.add(objRes)
         }
 
+        workWithResultModule.setArgs(listOfRoutes)
         workWithResultModule.setUniqueKey(uniqueToken)
 
         //serverModule.serverSender(workWithResultModule.getResultModule())
