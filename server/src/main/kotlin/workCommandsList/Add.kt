@@ -62,7 +62,7 @@ class Add: Command() {
         )
 
         workWithCollection.addElementToCollection(routeToAdd)
-        workWithResultModule.setMessages("success")
+        workWithResultModule.setMessages("Success")
         workWithResultModule.setUniqueKey(uniqueToken)
 
         serverModule.availableTokens[hashSHA.toSha(login)]?.let {

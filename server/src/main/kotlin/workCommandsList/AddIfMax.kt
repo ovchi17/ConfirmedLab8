@@ -69,13 +69,13 @@ class AddIfMax: Command() {
 
         if (collection.size == 0){
             workWithCollection.addElementToCollection(routeToAdd)
-            workWithResultModule.setMessages("success")
+            workWithResultModule.setMessages("Success")
         }else if(collection.size == 1){
             if (distance > collection.peek().distance){
                 workWithCollection.addElementToCollection(routeToAdd)
-                workWithResultModule.setMessages("success")
+                workWithResultModule.setMessages("Success")
             }else{
-                workWithResultModule.setMessages("noSuccess")
+                workWithResultModule.setMessages("No success")
             }
         }else{
             var intSr: Int = 0
@@ -86,9 +86,9 @@ class AddIfMax: Command() {
             }
             if (intSr == collection.size){
                 workWithCollection.addElementToCollection(routeToAdd)
-                workWithResultModule.setMessages("success")
+                workWithResultModule.setMessages("Success")
             }else{
-                workWithResultModule.setMessages("noSuccess")
+                workWithResultModule.setMessages("No success")
             }
         }
 

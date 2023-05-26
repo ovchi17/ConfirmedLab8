@@ -29,16 +29,15 @@ class RemoveById: Command() {
         collection.addAll(workWithCollection.getCollection())
 
         if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
+            workWithResultModule.setMessages("Empty collection")
         }else if(collection.size == 1){
             val checkObject = collection.peek()
             if (checkObject.id == checkId && checkObject.owner == owner){
                 dbModule.deleteRoute(checkObject.id)
                 workWithCollection.clearCollection()
-                workWithResultModule.setMessages("cleared")
+                workWithResultModule.setMessages("Cleared")
             }else{
-                workWithResultModule.setMessages("noId")
-                workWithResultModule.setMessages("notYou")
+                workWithResultModule.setMessages("No distance | Not your element")
             }
         }else{
             workWithCollection.clearCollection()
@@ -47,15 +46,15 @@ class RemoveById: Command() {
                 if (checkObject.id == checkId && checkObject.owner == owner) {
                     dbModule.deleteRoute(checkObject.id)
                     collection.poll()
-                    setMessageForMoreThenOne = "cleared"
+                    setMessageForMoreThenOne = "Cleared"
                 }else{
                     workWithCollection.addElementToCollection(collection.peek())
                     collection.poll()
                 }
             }
             workWithResultModule.setMessages(setMessageForMoreThenOne)
-            if (setMessageForMoreThenOne != "cleared"){
-                workWithResultModule.setMessages("notYou")
+            if (setMessageForMoreThenOne != "Cleared"){
+                workWithResultModule.setMessages("No distance | Not your element")
             }
         }
         workWithResultModule.setUniqueKey(uniqueToken)

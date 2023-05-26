@@ -17,7 +17,7 @@ class Clear: Command() {
 
         workWithCollection.clearCollection()
         dbModule.clearRoute()
-        workWithResultModule.setMessages("cleared")
+        workWithResultModule.setMessages("Cleared")
         workWithResultModule.setUniqueKey(uniqueToken)
 
         //serverModule.serverSender(workWithResultModule.getResultModule())

@@ -69,17 +69,16 @@ class UpdateId: Command() {
         val add: Add = Add()
 
         if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
+            workWithResultModule.setMessages("Empty collection")
         }else if(collection.size == 1){
             workWithCollection.clearCollection()
             val checkObject = collection.peek()
             if (checkObject.id == id && checkObject.owner == owner){
                 workWithCollection.addElementToCollection(routeToAdd)
                 dbModule.addRoute(id, name, creationDate, location1, location2, location3, location1_2, location2_2, location3_2, distance, coord1, coord2, owner, saved)
-                workWithResultModule.setMessages("success")
+                workWithResultModule.setMessages("Success")
             }else{
-                workWithResultModule.setMessages("noId")
-                workWithResultModule.setMessages("или нет доступа к объекту")
+                workWithResultModule.setMessages("No id | Not your element")
                 workWithCollection.addElementToCollection(collection.peek())
             }
         }else{
@@ -89,7 +88,7 @@ class UpdateId: Command() {
                 var checkObject = collection.peek()
                 if (checkObject.id == id && checkObject.owner == owner){
                     workWithCollection.addElementToCollection(routeToAdd)
-                    workWithResultModule.setMessages("success")
+                    workWithResultModule.setMessages("Success")
                     fl = false
                     collection.poll()
                 }else{
@@ -98,8 +97,7 @@ class UpdateId: Command() {
                 }
             }
             if (fl == false){
-                workWithResultModule.setMessages("noId")
-                workWithResultModule.setMessages("или нет доступа к объекту")
+                workWithResultModule.setMessages("No id | Not your element")
             }
         }
 

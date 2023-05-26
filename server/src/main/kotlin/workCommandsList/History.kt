@@ -16,7 +16,6 @@ class History: Command() {
     override fun execute(getArgs: MutableList<Any>, login:String, uniqueToken:String){
 
         val collection = workWithCollection.getHistory()
-        workWithResultModule.setMessages("historyOfCommands")
         var resultString = ""
         for (i in 0..collection.size - 1){
             resultString = resultString + collection[i] + " "

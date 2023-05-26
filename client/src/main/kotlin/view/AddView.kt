@@ -22,8 +22,8 @@ class AddView: View("BebraView"), KoinComponent {
             backgroundColor += Color.DARKGRAY
         }
         vbox {
-            label("Command \'Add\' "){
-                    textFill = Color.WHITE
+            label("Add"){
+                    textFill = Color.BLACK
                     style {
                         fontSize = 20.px
                     }
@@ -32,123 +32,123 @@ class AddView: View("BebraView"), KoinComponent {
         vbox {
             hbox {
                 label("name: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 11: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 12: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 13: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 21: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 22: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Location 23: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Distance: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Coordinate X: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 label("Coordinate Y: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 text(textPropertyRes)
             }
         }
-        vbox(3, Pos.BOTTOM_LEFT) {
+        vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
-            vbox {
+            hbox(5) {
                 button("Назад") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")
@@ -158,10 +158,8 @@ class AddView: View("BebraView"), KoinComponent {
                         replaceWith<WorkingPage>()
                     }
                 }
-            }
-            vbox {
                 button("Execute") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")

@@ -26,7 +26,7 @@ class AverageOfDistance: Command() {
         val sizeCollection = collection.toList()
 
         if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
+            workWithResultModule.setMessages("Empty collection")
         }else{
             var distances: Long = 0
             val result: Double

@@ -18,8 +18,8 @@ class ExitServerView: View("BebraView"), KoinComponent {
         }
         vbox {
             hbox {
-                label("Command \'Exit Server\' ") {
-                    textFill = Color.WHITE
+                label("Exit Server") {
+                    textFill = Color.BLACK
                     style {
                         fontSize = 20.px
                     }
@@ -29,11 +29,11 @@ class ExitServerView: View("BebraView"), KoinComponent {
                 text(textPropertyRes)
             }
         }
-        vbox(3, Pos.BOTTOM_LEFT) {
+        vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
-            vbox {
+            hbox(5) {
                 button("Назад") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")
@@ -43,10 +43,8 @@ class ExitServerView: View("BebraView"), KoinComponent {
                         replaceWith<WorkingPage>()
                     }
                 }
-            }
-            vbox {
                 button("Execute") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")

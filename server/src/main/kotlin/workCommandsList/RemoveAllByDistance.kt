@@ -28,16 +28,16 @@ class RemoveAllByDistance: Command() {
         val owner = serverModule.availableTokens[hashSHA.toSha(login)].toString()
 
         if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
+            workWithResultModule.setMessages("Empty collection")
         }else if(collection.size == 1){
             val checkObject = collection.peek()
             if (checkObject.distance == checkDistance && checkObject.owner == owner){
                 workWithCollection.clearCollection()
                 dbModule.deleteRoute(checkObject.id)
-                workWithResultModule.setMessages("cleared")
+                workWithResultModule.setMessages("Cleared")
             }else{
-                workWithResultModule.setMessages("noDistance")
-                workWithResultModule.setMessages("notYou")
+                workWithResultModule.setMessages("No distance | Not your element")
+                //workWithResultModule.setMessages("notYou")
             }
         }else{
             workWithCollection.clearCollection()

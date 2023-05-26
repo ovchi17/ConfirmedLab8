@@ -22,7 +22,7 @@ class Save: Command() {
 
         dbModule.savingTrue()
 
-        workWithResultModule.setMessages("saved")
+        workWithResultModule.setMessages("Saved")
         workWithResultModule.setUniqueKey(uniqueToken)
 
         serverModule.queueExeSen.put(workWithResultModule.getResultModule())

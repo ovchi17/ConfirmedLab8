@@ -20,6 +20,7 @@ class FilterLessThanDistance: Command() {
     override fun execute(getArgs: MutableList<Any>, login:String, uniqueToken:String){
 
         var flag = false
+        var counter = 0
 
         val collection = PriorityQueue<Route>(RouteComporator())
         collection.addAll(workWithCollection.getCollection())
@@ -27,11 +28,10 @@ class FilterLessThanDistance: Command() {
         val checkDistance = (getArgs[0] as Double).toLong()
 
         if (collection.size == 0){
-            workWithResultModule.setMessages("emptyCollection")
+            workWithResultModule.setMessages("Empty collection")
         }else if(collection.size == 1){
             if (collection.peek().distance < checkDistance.toString().toLong()){
-                workWithResultModule.setMessages("Name: " + collection.peek().name)
-                workWithResultModule.setMessages("   " + " Id: " + collection.peek().id.toString())
+                counter++
                 collection.poll()
             }else{
                 workWithResultModule.setMessages("noResult")
@@ -39,8 +39,7 @@ class FilterLessThanDistance: Command() {
         }else{
             for (i in 0..collection.size - 1){
                 if (collection.peek().distance < checkDistance.toString().toLong()){
-                    workWithResultModule.setMessages("Name: " + collection.peek().name)
-                    workWithResultModule.setMessages("   " + " Id: " + collection.peek().id.toString())
+                    counter++
                     collection.poll()
                     flag = true
                 }
@@ -49,6 +48,9 @@ class FilterLessThanDistance: Command() {
         }
         if(!flag){
             workWithResultModule.setMessages("noResult")
+        }
+        if (counter > 0){
+            workWithResultModule.setMessages("Success (deleted $counter elements)")
         }
         workWithCollection.clearCollection()
         workWithCollection.addAllElementToCollection(collection)

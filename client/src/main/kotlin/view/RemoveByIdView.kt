@@ -17,8 +17,8 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
             backgroundColor += Color.DARKGRAY
         }
         vbox {
-            label("Command \'Remove by id\' "){
-                textFill = Color.WHITE
+            label("Remove by Id"){
+                textFill = Color.BLACK
                 style {
                     fontSize = 20.px
                 }
@@ -28,24 +28,24 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
         vbox {
             hbox {
                 label("id: "){
-                    textFill = Color.WHITE
+                    textFill = Color.BLACK
                     style {
                         fontSize = 15.px
                     }
                 }
                 textfield() {
-                    promptText = "Введите текст..."
+                    promptText = "..."
                 }
             }
             hbox {
                 text(textPropertyRes)
             }
         }
-        vbox(3, Pos.BOTTOM_LEFT) {
+        vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
-            vbox {
+            hbox(5) {
                 button("Назад") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")
@@ -55,10 +55,8 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
                         replaceWith<WorkingPage>()
                     }
                 }
-            }
-            vbox {
                 button("Execute") {
-                    prefWidth = 122.0
+                    prefWidth = 120.0
                     prefHeight = 35.0
                     style {
                         backgroundColor += Color.web("#852178")

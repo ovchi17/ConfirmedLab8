@@ -17,9 +17,10 @@ class Info: Command() {
 
         val collection = workWithCollection.getCollection()
 
-        workWithResultModule.setMessages("Тип коллекции: " + collection.javaClass.toString())
-        workWithResultModule.setMessages("Размер коллекции: " + collection.size.toString())
-        workWithResultModule.setMessages("Дата создания коллекции: " + workWithCollection.getInitDate().toString())
+        //workWithResultModule.setMessages("Тип коллекции: " + collection.javaClass.toString())
+        //workWithResultModule.setMessages("Размер коллекции: " + collection.size.toString())
+        //workWithResultModule.setMessages("Дата создания коллекции: " + workWithCollection.getInitDate().toString())
+        workWithResultModule.setMessages(collection.javaClass.toString() + " | " + collection.size.toString() + " | " + workWithCollection.getInitDate().toString())
         workWithResultModule.setUniqueKey(uniqueToken)
 
         //serverModule.serverSender(workWithResultModule.getResultModule())
