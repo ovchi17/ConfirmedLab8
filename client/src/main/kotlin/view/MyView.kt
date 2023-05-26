@@ -34,11 +34,18 @@ class BasicInfo: KoinComponent {
     companion object {
         var logName = ""
         var token = ""
+        var lang = "RU"
 
         var setLog: String
             get() = logName
             set(value) {
                 logName = value
+            }
+
+        var setLang: String
+            get() = lang
+            set(value) {
+                lang = value
             }
 
         var setToken: String
@@ -51,29 +58,74 @@ class BasicInfo: KoinComponent {
 }
 
 class MyView: View("BebraView"), KoinComponent {
-    override val root = vbox {
+
+    val textPropertyLang = SimpleStringProperty("Язык|Lang: " + BasicInfo.lang)
+
+    override val root = vbox(5, Pos.CENTER) {
         alignment = javafx.geometry.Pos.CENTER
         addClass(Styles.blackBackground)
 
-        label("Здравствуйте! | Hello!"){
-            textFill = Color.WHITE
-            style {
-                fontSize = 40.px
+        hbox(5, Pos.CENTER) {
+            vbox(5, Pos.CENTER){
+                vbox(5, Pos.CENTER){
+                    label("Здравствуйте! | Hello!"){
+                        textFill = Color.WHITE
+                        style {
+                            fontSize = 40.px
+                        }
+                    }
+                }
+                prefHeight = 500.0
+                hbox(5, Pos.CENTER){
+                    button("Войти по логину") {
+                        prefWidth = 150.0
+                        prefHeight = 50.0
+                        style {
+                            fontSize = 16.px
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+                        action {
+                            replaceWith<Login>()
+                        }
+                    }
+                    button("Войти по токену") {
+                        prefWidth = 150.0
+                        prefHeight = 50.0
+                        style {
+                            fontSize = 16.px
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+                        action {
+                            //replaceWith<Login>()
+                            //sdelatRegPoTokeny
+                        }
+                    }
+                }
             }
         }
-
-
-        button("Войти") {
-            prefWidth = 100.0
-            prefHeight = 60.0
-            style {
-                fontSize = 20.px
-                backgroundColor += Color.web("#852178")
-                backgroundRadius += box(70.px)
+        hbox(5, Pos.BOTTOM_RIGHT){
+            prefHeight = 85.0
+            val buttonL = button("Язык: ${textPropertyLang.value}") {
+                prefWidth = 120.0
+                prefHeight = 50.0
+                style {
+                    fontSize = 12.px
+                    backgroundColor += Color.web("#852178")
+                    backgroundRadius += box(70.px)
+                }
+                action {
+                    if(BasicInfo.lang == "RU"){
+                        BasicInfo.setLang = "EN"
+                        textPropertyLang.set("Язык|Lang: " + BasicInfo.lang)
+                    }else{
+                        BasicInfo.setLang = "RU"
+                        textPropertyLang.set("Язык|Lang: " + BasicInfo.lang)
+                    }
+                }
             }
-            action {
-                replaceWith<Login>()
-            }
+            buttonL.textProperty().bind(textPropertyLang)
         }
     }
 }
