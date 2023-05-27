@@ -98,8 +98,7 @@ class MyView: View("BebraView"), KoinComponent {
                             backgroundRadius += box(70.px)
                         }
                         action {
-                            //replaceWith<Login>()
-                            //sdelatRegPoTokeny
+                            replaceWith<TokenEnter>()
                         }
                     }
                 }
@@ -215,6 +214,91 @@ class Login : View("BebraView"), KoinComponent {
     }
 }
 
+class TokenEnter : View("BebraView"), KoinComponent {
+
+    //override val root = Form()
+    override val root = Form().apply {
+        style {
+            border = null
+            backgroundColor += Color.DARKGRAY
+        }
+    }
+
+    private val passwordField = passwordfield()
+    val getToken = GetToken()
+    val basicInfo = BasicInfo()
+    //val textProperty = SimpleStringProperty("")
+    val textPropertyRes = SimpleStringProperty("")
+
+    init {
+        with(root) {
+            hbox{
+                prefWidth = 1000.0
+                prefHeight = 1000.0
+                style {
+                    backgroundColor += Color.DARKGRAY
+                }
+                fieldset("Регистрация") {
+                    prefHeight = 600.0
+                    style {
+                        border = null
+                        backgroundColor += Color.DARKGRAY
+                    }
+                    field("Ваш токен:") {
+                        add(passwordField)
+                    }
+                    button("Войти"){
+                        prefWidth = 200.0
+                        prefHeight = 35.0
+
+                        style{
+                            backgroundColor += Color.web("#852178")
+                            backgroundRadius += box(70.px)
+                        }
+
+                        action {
+                            val token = registerUser()
+                            if (token == "Y"){
+                                textPropertyRes.set("Успешно")
+                                val timer = Timer()
+                                timer.schedule(object : TimerTask() {
+                                    override fun run() {
+                                        runLater {
+                                            replaceWith<WorkingPage>()
+                                        }
+                                    }
+                                }, 2000)
+                            }else{
+                                textPropertyRes.set(token)
+                            }
+                        }
+                    }
+                    label(textPropertyRes)
+                }
+            }
+        }
+    }
+
+    private fun registerUser(): String {
+        BasicInfo.setLog = "noName"
+        val pas = passwordField.text
+        if (pas.length > 0){
+            val sendList = mutableListOf<Any>()
+            sendList.add(pas)
+            basicInfo.clientModule.sender("check_valid_token", sendList, "Update")
+            val getRes = basicInfo.clientModule.receiver(0)
+            if (getRes.args[0] == "Y"){
+                BasicInfo.setToken = pas
+                return "Y"
+            }else{
+                return "Not valid"
+            }
+        }else{
+            return "Not valid"
+        }
+    }
+}
+
 class WorkingPage : View("BebraView"), KoinComponent{
 
     val login = Login()
@@ -286,7 +370,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                             val sendList = mutableListOf<Any>()
                             basicInfo.clientModule.sender("log_out", sendList, BasicInfo.token)
                             basicInfo.clientModule.receiver(0)
-                            replaceWith<Login>()
+                            replaceWith<MyView>()
                         }
                     }
                     button("TurnOff"){

@@ -127,6 +127,7 @@ class CommandStarter(): KoinComponent{
     val token: Token = Token()
     val logOut: LogOut = LogOut()
     val validLogins: ValidLogins = ValidLogins()
+    val validToken: ValidTokens = ValidTokens()
 
     fun mp(command: String): Command? {
 
@@ -150,7 +151,8 @@ class CommandStarter(): KoinComponent{
             "switch" to switch,
             "token" to token,
             "log_out" to logOut,
-            "get_valid_logins" to validLogins)
+            "get_valid_logins" to validLogins,
+            "check_valid_token" to validToken)
 
         if (command in COMMANDS) {
             workWithCollection.historyUpdate(command)
