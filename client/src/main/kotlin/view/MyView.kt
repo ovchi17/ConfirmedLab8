@@ -497,7 +497,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<FilterLessThanDistanceView>()
                     }
 
-                    setTooltip(Tooltip("** filter_less_than_distance distance : вывести элементы, значение поля distance которых меньше заданного"))
+                    setTooltip(Tooltip("** filter_less_than_distance distance : вывести количество элементов, значение поля distance которых меньше заданного"))
                 }
                 button("History"){
                     prefWidth = 160.0

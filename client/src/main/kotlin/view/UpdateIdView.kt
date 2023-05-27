@@ -1,5 +1,6 @@
 package view
 
+import ProxyTokenizator
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.paint.Color
@@ -8,7 +9,19 @@ import tornadofx.*
 
 class UpdateIdView: View("BebraView"), KoinComponent {
 
-    val textPropertyRes = SimpleStringProperty("")
+    private val idO = SimpleStringProperty()
+    private val name = SimpleStringProperty()
+    private val location11 = SimpleStringProperty()
+    private val location12 = SimpleStringProperty()
+    private val location13 = SimpleStringProperty()
+    private val location21 = SimpleStringProperty()
+    private val location22 = SimpleStringProperty()
+    private val location23 = SimpleStringProperty()
+    private val coordinate1 = SimpleStringProperty()
+    private val coordinate2 = SimpleStringProperty()
+    private val distance = SimpleStringProperty()
+    private val result = SimpleStringProperty("")
+    val proxyT = ProxyTokenizator()
 
     override val root = vbox {
         prefWidth = 800.0
@@ -17,7 +30,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
             backgroundColor += Color.DARKGRAY
         }
         vbox {
-            label("Update Id"){
+            label("Add"){
                 textFill = Color.BLACK
                 style {
                     fontSize = 20.px
@@ -26,7 +39,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
         }
         vbox {
             hbox {
-                label("id: "){
+                label("Id: "){
                     textFill = Color.BLACK
                     style {
                         fontSize = 15.px
@@ -34,6 +47,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(idO)
                 }
             }
             hbox {
@@ -45,6 +59,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(name)
                 }
             }
             hbox {
@@ -56,6 +71,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location11)
                 }
             }
             hbox {
@@ -67,6 +83,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location12)
                 }
             }
             hbox {
@@ -78,6 +95,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location13)
                 }
             }
             hbox {
@@ -89,6 +107,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location21)
                 }
             }
             hbox {
@@ -100,6 +119,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location22)
                 }
             }
             hbox {
@@ -111,6 +131,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(location23)
                 }
             }
             hbox {
@@ -122,6 +143,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(distance)
                 }
             }
             hbox {
@@ -133,6 +155,7 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(coordinate1)
                 }
             }
             hbox {
@@ -144,10 +167,11 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(coordinate2)
                 }
             }
-            hbox {
-                text(textPropertyRes)
+            hbox{
+                label(result)
             }
         }
         vbox(3, Pos.TOP_LEFT) {
@@ -172,11 +196,29 @@ class UpdateIdView: View("BebraView"), KoinComponent {
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        replaceWith<WorkingPage>()
+                        var id = idO.value.toLongOrNull()
+                        var nm = name.value
+                        var l11 = location11.value.toLongOrNull()
+                        var l12 = location12.value.toLongOrNull()
+                        var l13 = location13.value.toLongOrNull()
+                        var l21 = location21.value.toLongOrNull()
+                        var l22 = location22.value.toLongOrNull()
+                        var l23 = location23.value.toLongOrNull()
+                        var coord1 = coordinate1.value.toLongOrNull()
+                        var coord2 = coordinate2.value.toLongOrNull()
+                        var dist = distance.value.toLongOrNull()
+                        if (id != null && nm != null && l11 != null && l12 != null && l13 != null && l21 != null && l22 != null && l23 != null && coord1 != null && coord2 != null && dist != null){
+                            sender(id, nm, l11, l12, l13, l21, l22, l23, coord1, coord2, dist)
+                        }
                     }
                 }
             }
         }
+    }
+    private fun sender(id:Long, name: String, l11:Long, l12:Long, l13:Long, l21:Long, l22:Long, l23:Long, coord1: Long, coord2:Long, dist:Long){
+        val list = mutableListOf<Any>(name, coord1, coord2, l11, l12, l13, l21, l22, l23, dist, id)
+        val getResult = proxyT.proxyTokenizator("update_id", list, BasicInfo.token)
+        result.set(getResult)
     }
 
 }

@@ -1,11 +1,16 @@
 package view
 
+import ProxyTokenizator
+import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.paint.Color
 import org.koin.core.component.KoinComponent
 import tornadofx.*
 
 class ClearView: View("BebraView"), KoinComponent {
+
+    private val result = SimpleStringProperty("")
+    val proxyT = ProxyTokenizator()
 
     override val root = vbox {
         prefWidth = 800.0
@@ -20,6 +25,9 @@ class ClearView: View("BebraView"), KoinComponent {
                     fontSize = 20.px
                 }
             }
+        }
+        hbox{
+            label(result)
         }
         vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
@@ -43,11 +51,17 @@ class ClearView: View("BebraView"), KoinComponent {
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        replaceWith<WorkingPage>()
+                        sender()
                     }
                 }
             }
         }
+    }
+
+    private fun sender(){
+        val list = mutableListOf<Any>()
+        val getResult = proxyT.proxyTokenizator("clear", list, BasicInfo.token)
+        result.set(getResult)
     }
 
 }

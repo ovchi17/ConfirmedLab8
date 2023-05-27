@@ -19,7 +19,6 @@ class FilterLessThanDistance: Command() {
      */
     override fun execute(getArgs: MutableList<Any>, login:String, uniqueToken:String){
 
-        var flag = false
         var counter = 0
 
         val collection = PriorityQueue<Route>(RouteComporator())
@@ -32,28 +31,18 @@ class FilterLessThanDistance: Command() {
         }else if(collection.size == 1){
             if (collection.peek().distance < checkDistance.toString().toLong()){
                 counter++
-                collection.poll()
-            }else{
-                workWithResultModule.setMessages("noResult")
             }
         }else{
             for (i in 0..collection.size - 1){
                 if (collection.peek().distance < checkDistance.toString().toLong()){
                     counter++
                     collection.poll()
-                    flag = true
+                }else{
+                    collection.poll()
                 }
-
             }
         }
-        if(!flag){
-            workWithResultModule.setMessages("noResult")
-        }
-        if (counter > 0){
-            workWithResultModule.setMessages("Success (deleted $counter elements)")
-        }
-        workWithCollection.clearCollection()
-        workWithCollection.addAllElementToCollection(collection)
+        workWithResultModule.setMessages("Success ($counter elements)")
         workWithResultModule.setUniqueKey(uniqueToken)
 
         //serverModule.serverSender(workWithResultModule.getResultModule())

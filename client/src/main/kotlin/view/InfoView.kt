@@ -1,5 +1,6 @@
 package view
 
+import ProxyTokenizator
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.paint.Color
@@ -8,7 +9,8 @@ import tornadofx.*
 
 class InfoView: View("BebraView"), KoinComponent {
 
-    val textPropertyRes = SimpleStringProperty("")
+    private val result = SimpleStringProperty("")
+    val proxyT = ProxyTokenizator()
 
     override val root = vbox {
         prefWidth = 800.0
@@ -17,17 +19,15 @@ class InfoView: View("BebraView"), KoinComponent {
             backgroundColor += Color.DARKGRAY
         }
         vbox {
-            hbox {
-                label("Info") {
-                    textFill = Color.BLACK
-                    style {
-                        fontSize = 20.px
-                    }
+            label("Info"){
+                textFill = Color.BLACK
+                style {
+                    fontSize = 20.px
                 }
             }
-            hbox {
-                text(textPropertyRes)
-            }
+        }
+        hbox{
+            label(result)
         }
         vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
@@ -51,11 +51,17 @@ class InfoView: View("BebraView"), KoinComponent {
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        replaceWith<WorkingPage>()
+                        sender()
                     }
                 }
             }
         }
+    }
+
+    private fun sender(){
+        val list = mutableListOf<Any>()
+        val getResult = proxyT.proxyTokenizator("info", list, BasicInfo.token)
+        result.set(getResult)
     }
 
 }

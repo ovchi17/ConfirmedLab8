@@ -1,5 +1,6 @@
 package view
 
+import ProxyTokenizator
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.paint.Color
@@ -8,7 +9,9 @@ import tornadofx.*
 
 class RemoveByIdView: View("BebraView"), KoinComponent {
 
-    val textPropertyRes = SimpleStringProperty("")
+    private val filternum = SimpleStringProperty()
+    private val result = SimpleStringProperty("")
+    val proxyT = ProxyTokenizator()
 
     override val root = vbox {
         prefWidth = 800.0
@@ -27,7 +30,7 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
         }
         vbox {
             hbox {
-                label("id: "){
+                label("distance: "){
                     textFill = Color.BLACK
                     style {
                         fontSize = 15.px
@@ -35,11 +38,12 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
                 }
                 textfield() {
                     promptText = "..."
+                    textProperty().bindBidirectional(filternum)
                 }
             }
-            hbox {
-                text(textPropertyRes)
-            }
+        }
+        hbox{
+            label(result)
         }
         vbox(3, Pos.TOP_LEFT) {
             prefHeight = 160.0
@@ -63,11 +67,21 @@ class RemoveByIdView: View("BebraView"), KoinComponent {
                         backgroundRadius += box(70.px)
                     }
                     action {
-                        replaceWith<WorkingPage>()
+                        var nm = filternum.value.toLongOrNull()
+                        if (nm != null){
+                            sender(nm)
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun sender(nm: Long){
+        val list = mutableListOf<Any>()
+        list.add(nm)
+        val getResult = proxyT.proxyTokenizator("remove_by_id", list, BasicInfo.token)
+        result.set(getResult)
     }
 
 }

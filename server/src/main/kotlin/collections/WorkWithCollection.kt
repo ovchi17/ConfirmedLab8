@@ -116,6 +116,7 @@ class WorkWithCollection: CollectionMainCommands {
         if (commandHistory.size == 14){
             commandHistory.remove(commandHistory[0])
         }
+        if (commandFromUser != "get_valid_logins" && commandFromUser != "token")
         commandHistory.add(commandFromUser)
     }
 

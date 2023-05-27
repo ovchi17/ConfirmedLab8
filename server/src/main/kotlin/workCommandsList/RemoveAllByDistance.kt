@@ -41,16 +41,21 @@ class RemoveAllByDistance: Command() {
             }
         }else{
             workWithCollection.clearCollection()
+            var fl = false
             for (i in 0..collection.size - 1){
                 val checkObject = collection.peek()
                 if (checkObject.distance == checkDistance && checkObject.owner == owner){
                     dbModule.deleteRoute(checkObject.id)
                     collection.poll()
-                    workWithResultModule.setMessages("cleared")
+                    workWithResultModule.setMessages("Cleared")
+                    fl = true
                 }else{
                     workWithCollection.addElementToCollection(collection.peek())
                     collection.poll()
                 }
+            }
+            if (!fl){
+                workWithResultModule.setMessages("No distance | Not your element")
             }
         }
         workWithResultModule.setUniqueKey(uniqueToken)
