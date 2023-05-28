@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
         modules(koinModule)
     }
 
-    //Stas
+    //Main
     System.setProperty("file.encoding", "UTF-8")
     val listNo = File("listNo.txt")
     val listLong = File("listLong.txt")
