@@ -18,7 +18,7 @@ import tornadofx.*
 import kotlin.concurrent.thread
 
 
-fun main() {
+fun main(args: Array<String>) {
 
     startKoin {
         modules(koinModule)
@@ -46,47 +46,55 @@ fun main() {
     logger.info("Начало программы")
     tokenizator.downloadLists()
 
-    launch<MyApp>("no")
+    if (args.isNotEmpty()) {
+        val param = args[0]
 
-    while (true){
-        if (authorizationFlag){
-            writeToConsole.writeToConsole("> ")
-            val getCommandFromUser: List<String> = ((readln().lowercase()) + " 1").split(" ")
-            writeToConsole.writeToConsole("Ваш токен: ")
-            val tkn: String = readln()
-            val command = getCommandFromUser[0]
-            val argument = mutableListOf<String>()
-            for (i in 1..getCommandFromUser.size - 1) {
-                argument.add(getCommandFromUser[i])
-            }
-            logger.info("Запуск команды: $command")
-            if (command == "log_out"){
-                clientModule.sender("log_out", sendList, tkn)
-                clientModule.receiver(0)
-                writeToConsole.writeToConsoleLn("Вы вышли из профиля")
-                authorizationFlag = false
-                writeToConsole.writeToConsoleLn("Завершить работу консольного приложения Y/N")
-                val ans: String = readln()
-                if (ans == "Y"){
-                    exitProcess(0)
+        if (param == "console"){
+            while (true){
+                if (authorizationFlag){
+                    writeToConsole.writeToConsole("> ")
+                    val getCommandFromUser: List<String> = ((readln().lowercase()) + " 1").split(" ")
+                    writeToConsole.writeToConsole("Ваш токен: ")
+                    val tkn: String = readln()
+                    val command = getCommandFromUser[0]
+                    val argument = mutableListOf<String>()
+                    for (i in 1..getCommandFromUser.size - 1) {
+                        argument.add(getCommandFromUser[i])
+                    }
+                    logger.info("Запуск команды: $command")
+                    if (command == "log_out"){
+                        clientModule.sender("log_out", sendList, tkn)
+                        clientModule.receiver(0)
+                        writeToConsole.writeToConsoleLn("Вы вышли из профиля")
+                        authorizationFlag = false
+                        writeToConsole.writeToConsoleLn("Завершить работу консольного приложения Y/N")
+                        val ans: String = readln()
+                        if (ans == "Y"){
+                            exitProcess(0)
+                        }
+                    }else{
+                        tokenizator.tokenizator(command, argument, tkn)
+                    }
+                }else{
+                    writeToConsole.writeToConsoleLn("Здравствуйте! Для дальнейшей работы с консолью, пожалуйста, введите ваш логин и пароль.")
+                    writeToConsole.writeToConsole("Ваш логин: ")
+                    val login: String = readln()
+                    writeToConsole.writeToConsoleLn("-----------------------------------------------")
+                    writeToConsole.writeToConsole("Ваш пароль: ")
+                    val pas: String = readln()
+                    if (login.length > 0 && pas.length > 0){
+                        if (getToken.loginAndGetToken(login, pas)){
+                            authorizationFlag = true
+                        }
+                    }
                 }
-            }else{
-                tokenizator.tokenizator(command, argument, tkn)
+
             }
         }else{
-            writeToConsole.writeToConsoleLn("Здравствуйте! Для дальнейшей работы с консолью, пожалуйста, введите ваш логин и пароль.")
-            writeToConsole.writeToConsole("Ваш логин: ")
-            val login: String = readln()
-            writeToConsole.writeToConsoleLn("-----------------------------------------------")
-            writeToConsole.writeToConsole("Ваш пароль: ")
-            val pas: String = readln()
-            if (login.length > 0 && pas.length > 0){
-                if (getToken.loginAndGetToken(login, pas)){
-                    authorizationFlag = true
-                }
-            }
+            launch<MyApp>("no")
         }
-
+    }else{
+        launch<MyApp>("no")
     }
 }
 

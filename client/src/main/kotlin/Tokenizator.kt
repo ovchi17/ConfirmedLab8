@@ -191,7 +191,7 @@ class Tokenizator: KoinComponent {
             sendList.addAll(list)
             clientModule.sender(command, sendList, tkn) // Следить
             val resultAnswer = clientModule.receiver(0)
-            //displayModule.displayModule(resultAnswer)
+            displayModule.displayModule(resultAnswer)
             return resultAnswer
         }else if(commandsList(command) == "listOfObjectPlus"){
             logger.info("Начала запуска команды по шаблону listOfObjectPlus")

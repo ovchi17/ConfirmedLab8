@@ -97,7 +97,7 @@ class MyView: View("BebraView"), KoinComponent {
                         prefHeight = 50.0
                         style {
                             fontSize = 16.px
-                            backgroundColor += Color.web("#852178")
+                            backgroundColor += Color.web("#37B6CE")
                             backgroundRadius += box(70.px)
                         }
                         action {
@@ -109,7 +109,7 @@ class MyView: View("BebraView"), KoinComponent {
                         prefHeight = 50.0
                         style {
                             fontSize = 16.px
-                            backgroundColor += Color.web("#852178")
+                            backgroundColor += Color.web("#37B6CE")
                             backgroundRadius += box(70.px)
                         }
                         action {
@@ -126,7 +126,7 @@ class MyView: View("BebraView"), KoinComponent {
                 prefHeight = 50.0
                 style {
                     fontSize = 12.px
-                    backgroundColor += Color.web("#852178")
+                    backgroundColor += Color.web("#37B6CE")
                     backgroundRadius += box(70.px)
                 }
                 action {
@@ -188,7 +188,7 @@ class Login : View("BebraView"), KoinComponent {
                             prefHeight = 35.0
 
                             style{
-                                backgroundColor += Color.web("#852178")
+                                backgroundColor += Color.web("#37B6CE")
                                 backgroundRadius += box(70.px)
                             }
 
@@ -214,7 +214,7 @@ class Login : View("BebraView"), KoinComponent {
                             prefHeight = 35.0
 
                             style{
-                                backgroundColor += Color.web("#852178")
+                                backgroundColor += Color.web("#37B6CE")
                                 backgroundRadius += box(70.px)
                             }
                             action {
@@ -285,7 +285,7 @@ class TokenEnter : View("BebraView"), KoinComponent {
                             prefHeight = 35.0
 
                             style{
-                                backgroundColor += Color.web("#852178")
+                                backgroundColor += Color.web("#37B6CE")
                                 backgroundRadius += box(70.px)
                             }
 
@@ -311,7 +311,7 @@ class TokenEnter : View("BebraView"), KoinComponent {
                             prefHeight = 35.0
 
                             style{
-                                backgroundColor += Color.web("#852178")
+                                backgroundColor += Color.web("#37B6CE")
                                 backgroundRadius += box(70.px)
                             }
                             action {
@@ -409,7 +409,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         prefHeight = 35.0
 
                         style{
-                            backgroundColor += Color.web("#852178")
+                            backgroundColor += Color.web("#37B6CE")
                             backgroundRadius += box(70.px)
                         }
                         action {
@@ -424,7 +424,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         prefHeight = 35.0
 
                         style{
-                            backgroundColor += Color.web("#852178")
+                            backgroundColor += Color.web("#37B6CE")
                             backgroundRadius += box(70.px)
                         }
                         action {
@@ -437,7 +437,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         prefHeight = 35.0
 
                         style{
-                            backgroundColor += Color.web("#852178")
+                            backgroundColor += Color.web("#37B6CE")
                             backgroundRadius += box(70.px)
                         }
                         action {
@@ -466,7 +466,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -480,7 +480,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -494,7 +494,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -508,7 +508,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -522,7 +522,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -536,7 +536,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -550,7 +550,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -564,7 +564,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -578,7 +578,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -592,7 +592,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -606,7 +606,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -620,7 +620,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -762,7 +762,7 @@ class TableShow: View("BebraView"), KoinComponent {
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -774,7 +774,7 @@ class TableShow: View("BebraView"), KoinComponent {
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -832,7 +832,7 @@ class Draw : View() {
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -846,7 +846,7 @@ class Draw : View() {
                     prefHeight = 35.0
 
                     style{
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {

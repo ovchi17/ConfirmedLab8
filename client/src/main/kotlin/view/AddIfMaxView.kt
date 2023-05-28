@@ -168,7 +168,7 @@ class AddIfMaxView: View("BebraView"), KoinComponent {
                     prefWidth = 120.0
                     prefHeight = 35.0
                     style {
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
@@ -179,7 +179,7 @@ class AddIfMaxView: View("BebraView"), KoinComponent {
                     prefWidth = 120.0
                     prefHeight = 35.0
                     style {
-                        backgroundColor += Color.web("#852178")
+                        backgroundColor += Color.web("#37B6CE")
                         backgroundRadius += box(70.px)
                     }
                     action {
