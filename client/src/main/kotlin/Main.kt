@@ -25,7 +25,7 @@ fun main() {
     }
 
     //Stas
-
+    System.setProperty("file.encoding", "UTF-8")
     val listNo = File("listNo.txt")
     val listLong = File("listLong.txt")
     val listObject = File("listObject.txt")

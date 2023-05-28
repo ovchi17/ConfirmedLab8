@@ -5,10 +5,13 @@ import LoginsUpdate
 import Tokenizator
 import app.Styles
 import commandsHelpers.GetToken
+import dataSet.Coordinates
 import dataSet.FakeRoute
+import javafx.animation.AnimationTimer
 import javafx.application.Platform
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
+import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.scene.Parent
 import javafx.scene.control.Tooltip
@@ -25,6 +28,9 @@ import tornadofx.*
 import usersView.LogSingle
 import java.util.*
 import kotlin.concurrent.thread
+import javafx.scene.image.Image
+import javafx.scene.layout.StackPane
+import kotlin.random.Random
 
 class BasicInfo: KoinComponent {
 
@@ -34,7 +40,8 @@ class BasicInfo: KoinComponent {
     companion object {
         var logName = ""
         var token = ""
-        var lang = "RU"
+        var lang = "ru"
+        var bundle = ResourceBundle.getBundle("messages", Locale("ru"))
 
         var setLog: String
             get() = logName
@@ -54,8 +61,16 @@ class BasicInfo: KoinComponent {
                 token = value
             }
 
+        var setBundle: ResourceBundle
+            get() = bundle
+            set(value) {
+                bundle = value
+            }
+
     }
 }
+
+class Point(val x: Double, val y: Double)
 
 class MyView: View("BebraView"), KoinComponent {
 
@@ -77,7 +92,7 @@ class MyView: View("BebraView"), KoinComponent {
                 }
                 prefHeight = 500.0
                 hbox(5, Pos.CENTER){
-                    button("Войти по логину") {
+                    button(BasicInfo.bundle.getString("enterLogin")) {
                         prefWidth = 150.0
                         prefHeight = 50.0
                         style {
@@ -89,7 +104,7 @@ class MyView: View("BebraView"), KoinComponent {
                             replaceWith<Login>()
                         }
                     }
-                    button("Войти по токену") {
+                    button(BasicInfo.bundle.getString("enterToken")) {
                         prefWidth = 150.0
                         prefHeight = 50.0
                         style {
@@ -105,7 +120,7 @@ class MyView: View("BebraView"), KoinComponent {
             }
         }
         hbox(5, Pos.BOTTOM_RIGHT){
-            prefHeight = 85.0
+            prefHeight = 80.0
             val buttonL = button("Язык: ${textPropertyLang.value}") {
                 prefWidth = 120.0
                 prefHeight = 50.0
@@ -115,11 +130,13 @@ class MyView: View("BebraView"), KoinComponent {
                     backgroundRadius += box(70.px)
                 }
                 action {
-                    if(BasicInfo.lang == "RU"){
-                        BasicInfo.setLang = "EN"
+                    if(BasicInfo.lang == "ru"){
+                        BasicInfo.setLang = "en"
+                        BasicInfo.setBundle = ResourceBundle.getBundle("messages", Locale("en"))
                         textPropertyLang.set("Язык|Lang: " + BasicInfo.lang)
                     }else{
-                        BasicInfo.setLang = "RU"
+                        BasicInfo.setLang = "ru"
+                        BasicInfo.setBundle = ResourceBundle.getBundle("messages", Locale("ru"))
                         textPropertyLang.set("Язык|Lang: " + BasicInfo.lang)
                     }
                 }
@@ -153,44 +170,59 @@ class Login : View("BebraView"), KoinComponent {
                 style {
                     backgroundColor += Color.DARKGRAY
                 }
-                fieldset("Регистрация") {
+                fieldset(BasicInfo.bundle.getString("registration")) {
                     prefHeight = 600.0
                     style {
                         border = null
                         backgroundColor += Color.DARKGRAY
                     }
-                    field("Ваш логин:") {
+                    field(BasicInfo.bundle.getString("yourLogin")) {
                         add(usernameField)
                     }
-                    field("Ваш пароль:") {
+                    field(BasicInfo.bundle.getString("yourPas")) {
                         add(passwordField)
                     }
-                    button("Войти/Зарегестрироваться"){
-                        prefWidth = 200.0
-                        prefHeight = 35.0
+                    hbox(4){
+                        button(BasicInfo.bundle.getString("entReg")){
+                            prefWidth = 200.0
+                            prefHeight = 35.0
 
-                        style{
-                            backgroundColor += Color.web("#852178")
-                            backgroundRadius += box(70.px)
-                        }
+                            style{
+                                backgroundColor += Color.web("#852178")
+                                backgroundRadius += box(70.px)
+                            }
 
-                        action {
-                            val token = registerUser()
-                            if (token.length == 19 || token.length == 24){
-                                textPropertyRes.set(token)
-                                val timer = Timer()
-                                timer.schedule(object : TimerTask() {
-                                    override fun run() {
-                                        runLater {
-                                            replaceWith<WorkingPage>()
+                            action {
+                                val token = registerUser()
+                                if (token.length == 19 || token.length == 24){
+                                    textPropertyRes.set(token)
+                                    val timer = Timer()
+                                    timer.schedule(object : TimerTask() {
+                                        override fun run() {
+                                            runLater {
+                                                replaceWith<WorkingPage>()
+                                            }
                                         }
-                                    }
-                                }, 5000)
-                            }else{
-                                textPropertyRes.set(token)
+                                    }, 5000)
+                                }else{
+                                    textPropertyRes.set(token)
+                                }
+                            }
+                        }
+                        button(BasicInfo.bundle.getString("backB")){
+                            prefWidth = 100.0
+                            prefHeight = 35.0
+
+                            style{
+                                backgroundColor += Color.web("#852178")
+                                backgroundRadius += box(70.px)
+                            }
+                            action {
+                                replaceWith<MyView>()
                             }
                         }
                     }
+
                     label(textPropertyRes)
                 }
             }
@@ -238,38 +270,52 @@ class TokenEnter : View("BebraView"), KoinComponent {
                 style {
                     backgroundColor += Color.DARKGRAY
                 }
-                fieldset("Регистрация") {
+                fieldset(BasicInfo.bundle.getString("registration")) {
                     prefHeight = 600.0
                     style {
                         border = null
                         backgroundColor += Color.DARKGRAY
                     }
-                    field("Ваш токен:") {
+                    field(BasicInfo.bundle.getString("yourToken")) {
                         add(passwordField)
                     }
-                    button("Войти"){
-                        prefWidth = 200.0
-                        prefHeight = 35.0
+                    hbox(4){
+                        button(BasicInfo.bundle.getString("entReg")){
+                            prefWidth = 200.0
+                            prefHeight = 35.0
 
-                        style{
-                            backgroundColor += Color.web("#852178")
-                            backgroundRadius += box(70.px)
-                        }
+                            style{
+                                backgroundColor += Color.web("#852178")
+                                backgroundRadius += box(70.px)
+                            }
 
-                        action {
-                            val token = registerUser()
-                            if (token == "Y"){
-                                textPropertyRes.set("Успешно")
-                                val timer = Timer()
-                                timer.schedule(object : TimerTask() {
-                                    override fun run() {
-                                        runLater {
-                                            replaceWith<WorkingPage>()
+                            action {
+                                val token = registerUser()
+                                if (token == "Y"){
+                                    textPropertyRes.set("")
+                                    val timer = Timer()
+                                    timer.schedule(object : TimerTask() {
+                                        override fun run() {
+                                            runLater {
+                                                replaceWith<WorkingPage>()
+                                            }
                                         }
-                                    }
-                                }, 2000)
-                            }else{
-                                textPropertyRes.set(token)
+                                    }, 1000)
+                                }else{
+                                    textPropertyRes.set(token)
+                                }
+                            }
+                        }
+                        button(BasicInfo.bundle.getString("backB")){
+                            prefWidth = 120.0
+                            prefHeight = 35.0
+
+                            style{
+                                backgroundColor += Color.web("#852178")
+                                backgroundRadius += box(70.px)
+                            }
+                            action {
+                                replaceWith<MyView>()
                             }
                         }
                     }
@@ -340,7 +386,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     backgroundColor += Color.LIGHTGRAY
                 }
                 hbox(7, Pos.TOP_LEFT){
-                    label(" Добро пожаловать, "){
+                    label(BasicInfo.bundle.getString("greet")){
                         font = font("Segoe UI", FontWeight.LIGHT, 20.0)
                     }
                     label(textPropertyName){
@@ -408,7 +454,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                     backgroundColor += Color.DARKGRAY
                 }
                 vbox(0, Pos.TOP_LEFT) {
-                    label("Список команд:"){
+                    label(BasicInfo.bundle.getString("listC")){
                         style {
                             fontSize = 20.px
                         }
@@ -427,7 +473,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<AddView>()
                     }
 
-                    setTooltip(Tooltip("** add {element} : добавить новый элемент в коллекцию"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("addD")))
                 }
                 button("AddIfMax"){
                     prefWidth = 160.0
@@ -441,7 +487,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<AddIfMaxView>()
                     }
 
-                    setTooltip(Tooltip("** add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("addIfMaxD")))
                 }
                 button("AverageOfDistance"){
                     prefWidth = 160.0
@@ -455,7 +501,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<AverageOfDistanceView>()
                     }
 
-                    setTooltip(Tooltip("** average_of_distance : вывести среднее значение поля distance для всех элементов коллекции"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("averageOfDistanceD")))
                 }
                 button("Clear"){
                     prefWidth = 160.0
@@ -469,7 +515,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<ClearView>()
                     }
 
-                    setTooltip(Tooltip("** clear : очистить коллекцию"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("clearD")))
                 }
                 button("ExitServer"){
                     prefWidth = 160.0
@@ -483,7 +529,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<ExitServerView>()
                     }
 
-                    setTooltip(Tooltip("** exitServer : Выключения сервера"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("exitServerD")))
                 }
                 button("FilterLessThanDistance"){
                     prefWidth = 160.0
@@ -497,7 +543,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<FilterLessThanDistanceView>()
                     }
 
-                    setTooltip(Tooltip("** filter_less_than_distance distance : вывести количество элементов, значение поля distance которых меньше заданного"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("filterLessThanDistanceD")))
                 }
                 button("History"){
                     prefWidth = 160.0
@@ -511,7 +557,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<HistoryView>()
                     }
 
-                    setTooltip(Tooltip("** history : вывести последние 14 команд (без их аргументов)"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("historyD")))
                 }
                 button("Info"){
                     prefWidth = 160.0
@@ -525,7 +571,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<InfoView>()
                     }
 
-                    setTooltip(Tooltip("** info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("infoD")))
                 }
                 button("RemoveAllByDistance"){
                     prefWidth = 160.0
@@ -539,7 +585,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<RemoveAllByDistanceView>()
                     }
 
-                    setTooltip(Tooltip("** remove_all_by_distance distance : удалить из коллекции все элементы, значение поля distance которого эквивалентно заданному"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("removeAllByDistanceD")))
                 }
                 button("RemoveById"){
                     prefWidth = 160.0
@@ -553,7 +599,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<RemoveByIdView>()
                     }
 
-                    setTooltip(Tooltip("** remove_by_id id : удалить элемент из коллекции по его id"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("removeByIdD")))
                 }
                 button("Save"){
                     prefWidth = 160.0
@@ -567,7 +613,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<SaveView>()
                     }
 
-                    setTooltip(Tooltip("** save : сохранить коллекцию в файл"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("saveD")))
                 }
                 button("UpdateId"){
                     prefWidth = 160.0
@@ -581,7 +627,7 @@ class WorkingPage : View("BebraView"), KoinComponent{
                         replaceWith<UpdateIdView>()
                     }
 
-                    setTooltip(Tooltip("** update id {element} : обновить значение элемента коллекции, id которого равен заданному"))
+                    setTooltip(Tooltip(BasicInfo.bundle.getString("updateIdD")))
                 }
             }
         }
@@ -592,6 +638,7 @@ class TableShow: View("BebraView"), KoinComponent {
 
     val basicInfo = BasicInfo()
     var objStrings: ObservableList<FakeRoute> = mutableListOf<FakeRoute>().observable()
+    var idToCoord = mutableMapOf<String, String>()
 
     init {
         val thread = thread {
@@ -604,6 +651,7 @@ class TableShow: View("BebraView"), KoinComponent {
                 if (getResultModule.status == Status.SUCCESS) {
                     for (msg in getResultModule.args) {
                         val rn = msg.toString().split(" ")
+                        idToCoord[rn[0]] = "${rn[10]} ${rn[11]}"
                         rnResult.add(FakeRoute(rn[0], rn[1], rn[2], rn[3], rn[4], rn[5], rn[6], rn[7], rn[8], rn[9], rn[10], rn[11], rn[12]))
                     }
                 }
@@ -708,19 +756,139 @@ class TableShow: View("BebraView"), KoinComponent {
             }
         vbox(3,  Pos.BOTTOM_LEFT) {
             prefHeight = 160.0
-            button("Назад"){
-                prefWidth = 122.0
-                prefHeight = 35.0
+            hbox(3){
+                button(BasicInfo.bundle.getString("backB")){
+                    prefWidth = 122.0
+                    prefHeight = 35.0
 
-                style{
-                    backgroundColor += Color.web("#852178")
-                    backgroundRadius += box(70.px)
+                    style{
+                        backgroundColor += Color.web("#852178")
+                        backgroundRadius += box(70.px)
+                    }
+                    action {
+                        replaceWith<WorkingPage>()
+                    }
                 }
-                action {
-                    replaceWith<WorkingPage>()
+                button(BasicInfo.bundle.getString("draw")){
+                    prefWidth = 122.0
+                    prefHeight = 35.0
+
+                    style{
+                        backgroundColor += Color.web("#852178")
+                        backgroundRadius += box(70.px)
+                    }
+                    action {
+                        replaceWith<Draw>()
+                    }
                 }
             }
         }
+    }
+}
+
+class Draw : View() {
+    val backgroundImage = Image(this::class.java.getResource("/picMap.png").toExternalForm())
+    val canvas = canvas(width = 600.0, height = 600.0)
+    val gc = canvas.graphicsContext2D
+    var startPoint = Point(300.0, 200.0)
+    var endPoint = Point(600.0, 600.0)
+    val tableShow = TableShow()
+    private val filternum = SimpleStringProperty("")
+
+    override val root = hbox {
+        style {
+            backgroundColor += Color.DARKGRAY
+        }
+        vbox{
+            prefWidth = 600.0
+            prefHeight = 600.0
+            stackpane {
+                imageview(backgroundImage) {
+                    fitWidth = 600.0
+                    fitHeight = 600.0
+                }
+                add(canvas)
+            }
+        }
+        vbox(4){
+            prefWidth = 200.0
+            prefHeight = 600.0
+
+            hbox(4) {
+                label("Id: "){
+                    textFill = Color.BLACK
+                    style {
+                        fontSize = 15.px
+                    }
+                }
+                textfield() {
+                    promptText = "..."
+                    textProperty().bindBidirectional(filternum)
+                }
+            }
+            hbox(4) {
+                button(BasicInfo.bundle.getString("start")) {
+                    prefWidth = 100.0
+                    prefHeight = 35.0
+
+                    style{
+                        backgroundColor += Color.web("#852178")
+                        backgroundRadius += box(70.px)
+                    }
+                    action {
+                        if (filternum.value != "" && filternum.value in tableShow.idToCoord.keys.toList()){
+                            startDrawing()
+                        }
+                    }
+                }
+                button(BasicInfo.bundle.getString("backB")){
+                    prefWidth = 100.0
+                    prefHeight = 35.0
+
+                    style{
+                        backgroundColor += Color.web("#852178")
+                        backgroundRadius += box(70.px)
+                    }
+                    action {
+                        replaceWith<WorkingPage>()
+                    }
+                }
+            }
+        }
+    }
+    private fun startDrawing() {
+        val sp = tableShow.idToCoord[filternum.value]?.split(" ")
+        startPoint = Point(((sp?.get(0)?.toDouble() ?:50.0 ) * 10) % 600, ((sp?.get(1)?.toDouble() ?:50.0 ) * 10) % 600)
+        endPoint = Point(Random.nextInt(100, 601).toDouble(), Random.nextInt(100, 601).toDouble())
+        val animationTimer = object : AnimationTimer() {
+            var progress = 0.0
+
+            override fun handle(now: Long) {
+                if (progress >= 1.0) {
+                    stop()
+                }
+                gc.clearRect(0.0, 0.0, canvas.width, canvas.height)
+
+                gc.fill = c("red")
+                gc.fillOval(startPoint.x - 7.5, startPoint.y - 7.5, 15.0, 15.0)
+                gc.fillOval(endPoint.x - 7.5, endPoint.y - 7.5, 15.0, 15.0)
+
+                gc.stroke = c("blue")
+                gc.lineWidth = 4.0
+
+                val currentX = startPoint.x + (endPoint.x - startPoint.x) * progress
+                val currentY = startPoint.y + (endPoint.y - startPoint.y) * progress
+
+                gc.strokeLine(startPoint.x, startPoint.y, currentX, currentY)
+
+                progress += 0.01
+
+                if (progress >= 1.0) {
+                    stop()
+                }
+            }
+        }
+        animationTimer.start()
     }
 }
 
