@@ -43,6 +43,10 @@ fun main(args: Array<String>) {
 
     //writeToConsole.writeToConsoleLn("Для получения списка команд введите: help")
     clientModule.start()
+    val client = KoinStarter().returnTCPModule()
+    client.connect("localhost", 3344)
+    client.startReceiver()
+
     logger.info("Начало программы")
     tokenizator.downloadLists()
 
@@ -102,6 +106,7 @@ class KoinStarter: KoinComponent{
     val tokenizator: Tokenizator by inject()
     val clientModule: ClientModule by inject()
     val loginsUpdate: LoginsUpdate by inject()
+    val tcpmodule: TCPClient by inject()
     fun returnTokenizator(): Tokenizator{
         return tokenizator
     }
@@ -113,4 +118,9 @@ class KoinStarter: KoinComponent{
     fun returnLoginsUpdate(): LoginsUpdate{
         return loginsUpdate
     }
+
+    fun returnTCPModule(): TCPClient{
+        return tcpmodule
+    }
+
 }

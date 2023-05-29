@@ -2,6 +2,7 @@ package di
 
 import DataBaseManager
 import ServerModule
+import TCPServer
 import controllers.*
 import moduleWithResults.WorkWithResultModule
 import org.koin.dsl.module
@@ -19,6 +20,10 @@ val serverModule = module {
 
     single {
         Serializer()
+    }
+
+    single {
+        TCPServer()
     }
 
     factory {

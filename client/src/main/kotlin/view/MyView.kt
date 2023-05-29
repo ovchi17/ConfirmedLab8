@@ -2,6 +2,7 @@ package view
 
 import ClientModule
 import LoginsUpdate
+import TCPClient
 import Tokenizator
 import app.Styles
 import commandsHelpers.GetToken
@@ -10,10 +11,14 @@ import dataSet.FakeRoute
 import javafx.animation.AnimationTimer
 import javafx.application.Platform
 import javafx.beans.property.SimpleStringProperty
+import javafx.collections.ListChangeListener
 import javafx.collections.ObservableList
 import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.scene.Parent
+import javafx.scene.control.Button
+import javafx.scene.control.TextArea
+import javafx.scene.control.TextField
 import javafx.scene.control.Tooltip
 import javafx.scene.layout.ColumnConstraints
 import javafx.scene.layout.GridPane
@@ -30,6 +35,7 @@ import java.util.*
 import kotlin.concurrent.thread
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
+import javafx.scene.text.Font
 import kotlin.random.Random
 
 class BasicInfo: KoinComponent {
@@ -37,11 +43,13 @@ class BasicInfo: KoinComponent {
     val loginsUpdate: LoginsUpdate by inject()
     val clientModule: ClientModule by inject()
     val tokenizator: Tokenizator by inject()
+    val tcpmodule: TCPClient by inject()
     companion object {
         var logName = ""
         var token = ""
         var lang = "ru"
         var bundle = ResourceBundle.getBundle("messages", Locale("ru"))
+        var listMessages = mutableListOf<String>().observable()
 
         var setLog: String
             get() = logName
@@ -67,6 +75,10 @@ class BasicInfo: KoinComponent {
                 bundle = value
             }
 
+    }
+    fun add(message: String){
+        listMessages.add(message)
+        //println(listMessages)
     }
 }
 
@@ -781,6 +793,18 @@ class TableShow: View("BebraView"), KoinComponent {
                         replaceWith<Draw>()
                     }
                 }
+                button(BasicInfo.bundle.getString("chatB")){
+                    prefWidth = 122.0
+                    prefHeight = 35.0
+
+                    style{
+                        backgroundColor += Color.web("#37B6CE")
+                        backgroundRadius += box(70.px)
+                    }
+                    action {
+                        replaceWith<Chat>()
+                    }
+                }
             }
         }
     }
@@ -891,4 +915,76 @@ class Draw : View() {
         animationTimer.start()
     }
 }
+
+class Chat : View() {
+    private val chatLog = TextArea()
+    val basicInfo = BasicInfo()
+
+    init {
+        chatLog.isEditable = false
+        chatLog.prefHeight = 400.0
+        chatLog.font = Font(16.0)
+        BasicInfo.listMessages.onChange { updateChatLog() }
+        updateChatLog()
+    }
+
+    override val root = vbox {
+        style {
+            backgroundColor += Color.DARKGRAY
+        }
+        alignment = Pos.TOP_CENTER
+        spacing = 10.0
+
+        children.add(chatLog)
+
+        hbox {
+            val inputField = textfield()
+
+            button("Send") {
+                style {
+                    backgroundColor += Color.web("#37B6CE")
+                    backgroundRadius += box(70.px)
+                }
+                action {
+                    val message = inputField.text
+                    if (message.isNotBlank()) {
+                        sendM(message)
+                        inputField.clear()
+                    }
+                }
+            }
+        }
+        vbox(3, Pos.BOTTOM_RIGHT){
+            prefHeight = 150.0
+            button(BasicInfo.bundle.getString("backB")) {
+                prefWidth = 100.0
+                prefHeight = 35.0
+
+                style {
+                    backgroundColor += Color.web("#37B6CE")
+                    backgroundRadius += box(70.px)
+                }
+                action {
+                    replaceWith<WorkingPage>()
+                }
+            }
+        }
+    }
+
+    private fun sendM(text: String) {
+        val resMessage = BasicInfo.logName + ": " + text
+        //println(resMessage)
+        basicInfo.tcpmodule.sendRequest(resMessage)
+    }
+
+    private fun updateChatLog() {
+        val messages = BasicInfo.listMessages.joinToString("\n")
+        Platform.runLater {
+            chatLog.text = messages
+        }
+    }
+}
+
+
+
 

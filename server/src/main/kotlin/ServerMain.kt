@@ -24,12 +24,14 @@ fun main() {
     workWithCollection.setInitId(getInfo)
     dataBaseManager.uploadAllRoutes()
     dataBaseManager.uploadAllLogins()
+    val server = ServerModuleGet().returnTcpServer()
 
     System.setProperty("log4j.configurationFile", "classpath:log4j2.xml")
     val logger: Logger = LogManager.getLogger(ServerModuleGet::class.java)
     logger.info("Запуск сервера")
     val threadPoolMain = Executors.newFixedThreadPool(10)
 
+    thread { server.start(3344) }
     thread { serverModule.serverReceiver() }
     thread { serverModule.commandExecutor() }
     thread { serverModule.serverSender() }
@@ -41,6 +43,7 @@ class ServerModuleGet : KoinComponent{
     val serverModule: ServerModule by inject()
     val dbModule: DataBaseManager by inject()
     val workWithCollection: CollectionMainCommands by inject()
+    val tcpServer: TCPServer by inject()
     fun returnServerModule():ServerModule{
         return serverModule
     }
@@ -51,5 +54,9 @@ class ServerModuleGet : KoinComponent{
 
     fun returnWorkWithCollection(): CollectionMainCommands{
         return workWithCollection
+    }
+
+    fun returnTcpServer(): TCPServer{
+        return tcpServer
     }
 }

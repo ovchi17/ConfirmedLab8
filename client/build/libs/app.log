@@ -369,3 +369,25 @@
 2023-05-16 23:21:22.104 [main] INFO  Tokenizator - Начала запуска команды по шаблону listOfNo
 2023-05-16 23:21:22.105 [main] INFO  ClientModule - Запрос отправлен
 2023-05-16 23:21:22.123 [main] INFO  ClientModule - Получен ответ от сервера
+2023-05-29 01:22:58.148 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 01:22:58.209 [main] INFO  KoinStarter - Начало программы
+2023-05-29 01:26:19.803 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 01:26:19.818 [main] INFO  KoinStarter - Начало программы
+2023-05-29 01:27:46.594 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 01:27:46.609 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:05:21.643 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:05:21.656 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:08:26.345 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:08:26.357 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:09:43.457 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:09:43.469 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:11:09.324 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:11:09.339 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:13:06.551 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:13:06.563 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:32:14.220 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:32:14.232 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:36:01.819 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:36:01.831 [main] INFO  KoinStarter - Начало программы
+2023-05-29 02:42:48.534 [main] INFO  ClientModule - Запуск DatagramChannel
+2023-05-29 02:42:48.547 [main] INFO  KoinStarter - Начало программы
